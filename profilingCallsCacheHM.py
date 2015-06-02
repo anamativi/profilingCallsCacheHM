@@ -66,6 +66,14 @@ class Function:
 Com = Function('Com', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Enc = Function('Enc', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Other = Function('Other', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+Entropy = Function('Entropy', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+Filter = Function('Filter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+Inter = Function('Inter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+Intra = Function('Intra', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+IQ = Function('IQ', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+Q = Function('Q', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+IT = Function('IT', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+T = Function('T', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 def parseAnnotate(hmConfig, memoryConfig):
 	
@@ -107,6 +115,22 @@ def parseAnnotate(hmConfig, memoryConfig):
 						Com.accumulate('Com', words)
 					else:
 						Other.accumulate('Other', words)
+			if "Entropy" in name:
+				Entropy.accumulate('Entropy', words)
+			if "Filter" in name:
+				Filter.accumulate('Filter', words)
+			if "Inter" in name:
+				Inter.accumulate('Inter', words)
+			if "Intra" in name:
+				Intra.accumulate('Intra', words)
+			if "DeQuant" in name:
+				IQ.accumulate('IQ', words)
+			if "Quant" in name:
+				Q.accumulate('Q', words)
+			if "invTrans" in name:
+				IT.accumulate('IT', words)
+			if "Transform" in name:
+				T.accumulate('T', words)
 					
 	print >> csv, Com.toString()
 	print >> csv, Enc.toString()
