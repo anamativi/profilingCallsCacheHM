@@ -119,7 +119,7 @@ def parseAnnotate(hmConfig, memoryConfig):
 				Entropy.accumulate('Entropy', words)
 			if "Filter" in name:
 				Filter.accumulate('Filter', words)
-			if "Inter" in name:
+			if "Inter" or "SAD" in name:
 				Inter.accumulate('Inter', words)
 			if "Intra" in name:
 				Intra.accumulate('Intra', words)
@@ -135,6 +135,14 @@ def parseAnnotate(hmConfig, memoryConfig):
 	print >> csv, Com.toString()
 	print >> csv, Enc.toString()
 	print >> csv, Other.toString()
+	print >> csv, Entropy.toString()
+	print >> csv, Filter.toString()
+	print >> csv, Intra.toString()
+	print >> csv, Inter.toString()
+	print >> csv, IQ.toString()
+	print >> csv, Q.toString()
+	print >> csv, IT.toString()
+	print >> csv, T.toString()		
 	f.close
     			
 def writeOutput(functionsList, i):
