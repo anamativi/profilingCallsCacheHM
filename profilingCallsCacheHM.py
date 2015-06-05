@@ -5,7 +5,7 @@ import os
 import sys
 import time
 
-classes = {'TEncEntropy':'Entropy', 'TComInterpolationFilter':'Filter', 'TComTrQuant':'Q', 'partialButterflyInverse':'IT', 'partialButterfly':'T'}
+classes = {'TEncEntropy':'Entropy', 'TComInterpolationFilter':'Filter', 'TComTrQuant':'Q', 'partialButterflyInverse(\d+)':'IT', 'partialButterfly(\d+)':'T'}
 
 proj = sys.argv[1]
 param = []
@@ -106,14 +106,27 @@ def parseAnnotate(hmConfig, memoryConfig):
 			x = Function(name, words)
 			functionsList.append(x)
 			writeOutput(functionsList, i)
-			fclass = name.split(':')
-			fclass = fclass[0]
+			fclasse = name.split(':')
+			fclass = fclasse[0]
 			
 			if fclass in classes:
-				module = classes[fclass]
-				print module
-				fclass.accumulate(fclass, words)
-			
+				if classes[fclass] == "Entropy":
+					Entropy.accumulate('Entropy', words)
+				else:
+					if classes[fclass] == "Filter":
+						Filter.accumulate('Filter', words)
+					else:
+						if classes[fclass] == "T":							
+							T.accumulate('T', words)
+						else:
+							if classes[fclass] == "IT":
+								IT.accumulate('IT', words)
+							if classes[fclass] == "Q":
+								if "DeQuant" in fclasse[1]:
+									IQ.accumulate('IQ', words)
+								else:
+									Q.accumulate('Q', words)
+								
 			#Cache results for encoder and common functions
 			if "TCom" in name:
 				Com.accumulate('Common', words)
