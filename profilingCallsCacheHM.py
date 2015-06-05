@@ -5,6 +5,8 @@ import os
 import sys
 import time
 
+classes = {'TEncEntropy':'Entropy', 'TComInterpolationFilter':'Filter', 'TComTrQuant':'Q', 'partialButterflyInverse':'IT', 'partialButterfly':'T'}
+
 proj = sys.argv[1]
 param = []
 functionsList = []
@@ -104,34 +106,27 @@ def parseAnnotate(hmConfig, memoryConfig):
 			x = Function(name, words)
 			functionsList.append(x)
 			writeOutput(functionsList, i)
+			fclass = name.split(':')
+			fclass = fclass[0]
 			
+			if fclass in classes:
+				module = classes[fclass]
+				print module
+				fclass.accumulate(fclass, words)
+			
+			#Cache results for encoder and common functions
 			if "TCom" in name:
-				Com.accumulate('Com', words)
+				Com.accumulate('Common', words)
 			else:
 				if "TEnc" in name:
-					Enc.accumulate('Enc', words)
+					Enc.accumulate('Encoder', words)
 				else:
 					if "partialButterfly" in name:
-						Com.accumulate('Com', words)
+						Com.accumulate('Common', words)
 					else:
 						Other.accumulate('Other', words)
-			if "Entropy" in name:
-				Entropy.accumulate('Entropy', words)
-			if "Filter" in name:
-				Filter.accumulate('Filter', words)
-			if "Inter" or "SAD" in name:
-				Inter.accumulate('Inter', words)
-			if "Intra" in name:
-				Intra.accumulate('Intra', words)
-			if "DeQuant" in name:
-				IQ.accumulate('IQ', words)
-			if "Quant" in name:
-				Q.accumulate('Q', words)
-			if "invTrans" in name:
-				IT.accumulate('IT', words)
-			if "Transform" in name:
-				T.accumulate('T', words)
-					
+
+
 	print >> csv, Com.toString()
 	print >> csv, Enc.toString()
 	print >> csv, Other.toString()
