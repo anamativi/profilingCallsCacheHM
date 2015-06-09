@@ -4,15 +4,14 @@
 import os
 import sys
 import time
-
-classes = {'TEncEntropy':'Entropy', 'TComInterpolationFilter':'Filter', 'TComTrQuant':'Q', 'partialButterflyInverse(\d+)':'IT', 'partialButterfly(\d+)':'T'}
+import re
 
 proj = sys.argv[1]
 param = []
 functionsList = []
 out = "Results_" + time.strftime("%d_%m_%y") + "/"
 
-os.system("mkdir -p" + out) #creates results folder, if it insnt there already
+os.system("mkdir --p " + out) #creates results folder, if it insnt there already
 
 #reads project archive and attributes simulation variables
 p = open(proj + ".txt", 'r')
@@ -63,11 +62,12 @@ class Function:
 		self.DLmw += int(words[8].replace(',', ''))
 			
 		return Function(self.name, [self.Ir, self.Dr, self.Dw, self.I1mr, self.D1mr, self.D1mw, self.ILmr, self.DLmr, self.DLmw])
-		
+	
 #initialization of acc variables
 Com = Function('Com', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Enc = Function('Enc', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Other = Function('Other', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+#module
 Entropy = Function('Entropy', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Filter = Function('Filter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Inter = Function('Inter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
@@ -76,6 +76,26 @@ IQ = Function('IQ', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Q = Function('Q', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 IT = Function('IT', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 T = Function('T', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+#class
+TComRdCost = Function('TComRdCost', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TEncSearch = Function('TEncSearch', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TEncSbac = Function('TEncSbac', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TComPrediction = Function('TComPrediction', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TComTrQuant = Function('TComTrQuant', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TComDataCU = Function('TComDataCU', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TComYuv = Function('TComYuv', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TComTU = Function('TComTU', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TComLoopFilter = Function('TComLoopFilter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TEncGOP = Function('TEncGOP', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TComBitCounter = Function('TComBitCounter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TEncEntropy = Function('TEncEntropy', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+TComInterpolationFilter = Function('TComInterpolationFilter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+
+classes = {'TEncEntropy':'Entropy', 'TComInterpolationFilter':'Filter', 'TComTrQuant':'Q'}
+classes[re.compile('partialButterflyInverse(\d+)')] = 'TI'
+classes[re.compile('partialButterfly(d+)')] = 'T'
+
+strToObj = {'TEncEntropy': TEncEntropy, 'TComInterpolationFilter': TComInterpolationFilter, 'TComTrQuant': TComTrQuant, 'TEncSearch': TEncSearch, 'TEncGOP': TEncGOP, 'TEncSbac': TEncSbac, 'TComPrediction': TComPrediction, 'TComLoopFilter': TComLoopFilter, 'TComYuv': TComYuv, 'TComBitCounter': TComBitCounter, 'TComDataCU': TComDataCU, 'TComTU': TComTU}
 
 def parseAnnotate(hmConfig, memoryConfig):
 	
@@ -106,8 +126,14 @@ def parseAnnotate(hmConfig, memoryConfig):
 			x = Function(name, words)
 			functionsList.append(x)
 			writeOutput(functionsList, i)
-			fclasse = name.split(':')
+			fclasse = name.split(':') #lembrete: método fica em fclasse[2]
 			fclass = fclasse[0]
+			
+			if fclass in strToObj:
+				myinstance = strToObj.get(fclass)
+				if myinstance is not None:
+					print myinstance.name
+					myinstance.accumulate(fclass, words)
 			
 			if fclass in classes:
 				if classes[fclass] == "Entropy":
