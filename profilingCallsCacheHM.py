@@ -15,10 +15,10 @@ os.system("mkdir --p " + out) #creates results folder, if it insnt there already
 
 #reads project archive and attributes simulation variables
 p = open(proj + ".txt", 'r')
-linhas = p.readlines()
+lines = p.readlines()
 p.close()
 
-for n in linhas:
+for n in lines:
 	l = n.split(',')
 	l.pop()
 	param.append(l)
@@ -64,10 +64,6 @@ class Function:
 		return Function(self.name, [self.Ir, self.Dr, self.Dw, self.I1mr, self.D1mr, self.D1mw, self.ILmr, self.DLmr, self.DLmw])
 	
 #initialization of acc variables
-Com = Function('Com', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-Enc = Function('Enc', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-Other = Function('Other', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-#module
 Entropy = Function('Entropy', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Filter = Function('Filter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Inter = Function('Inter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
@@ -76,29 +72,13 @@ IQ = Function('IQ', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Q = Function('Q', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 IT = Function('IT', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 T = Function('T', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-#class
-TComRdCost = Function('TComRdCost', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TEncSearch = Function('TEncSearch', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TEncSbac = Function('TEncSbac', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TComPrediction = Function('TComPrediction', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TComTrQuant = Function('TComTrQuant', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TComDataCU = Function('TComDataCU', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TComYuv = Function('TComYuv', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TComTU = Function('TComTU', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TComLoopFilter = Function('TComLoopFilter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TEncGOP = Function('TEncGOP', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TComBitCounter = Function('TComBitCounter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TEncEntropy = Function('TEncEntropy', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-TComInterpolationFilter = Function('TComInterpolationFilter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+P = Function('P', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 
-classes = {'TEncEntropy':'Entropy', 'TComInterpolationFilter':'Filter', 'TComTrQuant':'Q'}
-classes[re.compile('partialButterflyInverse(\d+)')] = 'TI'
-classes[re.compile('partialButterfly(d+)')] = 'T'
-
-strToObj = {'TEncEntropy': TEncEntropy, 'TComInterpolationFilter': TComInterpolationFilter, 'TComTrQuant': TComTrQuant, 'TEncSearch': TEncSearch, 'TEncGOP': TEncGOP, 'TEncSbac': TEncSbac, 'TComPrediction': TComPrediction, 'TComLoopFilter': TComLoopFilter, 'TComYuv': TComYuv, 'TComBitCounter': TComBitCounter, 'TComDataCU': TComDataCU, 'TComTU': TComTU}
+classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Filter, 'TComTrQuant':Q, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter}
+classesDic[re.compile('partialButterflyInverse(\d+)')] = IT
+classesDic[re.compile('partialButterfly(d+)')] = T
 
 def parseAnnotate(hmConfig, memoryConfig):
-	
 	header = hmConfig + memoryConfig + "\tIr\tDr\tDw\tI1mr\tD1mr\tD1mw\tILmr\tDLmr\tDLmw"
 	print >> csv, header  #print header
 
@@ -129,46 +109,12 @@ def parseAnnotate(hmConfig, memoryConfig):
 			fclasse = name.split(':') #lembrete: método fica em fclasse[2]
 			fclass = fclasse[0]
 			
-			if fclass in strToObj:
-				myinstance = strToObj.get(fclass)
+			if fclass in classesDic:
+				myinstance = classesDic.get(fclass)
 				if myinstance is not None:
-					print myinstance.name
 					myinstance.accumulate(fclass, words)
-			
-			if fclass in classes:
-				if classes[fclass] == "Entropy":
-					Entropy.accumulate('Entropy', words)
-				else:
-					if classes[fclass] == "Filter":
-						Filter.accumulate('Filter', words)
-					else:
-						if classes[fclass] == "T":							
-							T.accumulate('T', words)
-						else:
-							if classes[fclass] == "IT":
-								IT.accumulate('IT', words)
-							if classes[fclass] == "Q":
-								if "DeQuant" in fclasse[1]:
-									IQ.accumulate('IQ', words)
-								else:
-									Q.accumulate('Q', words)
-								
-			#Cache results for encoder and common functions
-			if "TCom" in name:
-				Com.accumulate('Common', words)
-			else:
-				if "TEnc" in name:
-					Enc.accumulate('Encoder', words)
-				else:
-					if "partialButterfly" in name:
-						Com.accumulate('Common', words)
-					else:
-						Other.accumulate('Other', words)
-
-
-	print >> csv, Com.toString()
-	print >> csv, Enc.toString()
-	print >> csv, Other.toString()
+	#printing final results to csv
+	print >>csv, "\nFinal Results"
 	print >> csv, Entropy.toString()
 	print >> csv, Filter.toString()
 	print >> csv, Intra.toString()
@@ -176,7 +122,8 @@ def parseAnnotate(hmConfig, memoryConfig):
 	print >> csv, IQ.toString()
 	print >> csv, Q.toString()
 	print >> csv, IT.toString()
-	print >> csv, T.toString()		
+	print >> csv, T.toString()
+	print >> csv, P.toString()
 	f.close
     			
 def writeOutput(functionsList, i):
