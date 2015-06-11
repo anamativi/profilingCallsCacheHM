@@ -68,15 +68,19 @@ Entropy = Function('Entropy', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Filter = Function('Filter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Inter = Function('Inter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Intra = Function('Intra', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-IQ = Function('IQ', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-Q = Function('Q', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-IT = Function('IT', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-T = Function('T', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-P = Function('P', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+I = Function('Inter/Intra', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+IQ = Function('InvQuant', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+Q = Function('Quant', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+IT = Function('InvTransf', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+T = Function('Transf', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+P = Function('Pre/Pos', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 
-classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Filter, 'TComTrQuant':Q, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter}
-classesDic[re.compile('partialButterflyInverse(\d+)')] = IT
-classesDic[re.compile('partialButterfly(d+)')] = T
+classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Filter, 'TComTrQuant':Q, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT}
+PBI = re.compile('partialButterflyInverse(\d+)')
+PB = re.compile('partialButterfly(\d+)')
+InterList = ['Inter', 'xGetComponentBits', 'xPatternRefinement', 'TZSearch', 'Mv', 'DPCM', 'xGetTemplateCost', 'Motion', 'MVP', 'xMergeEstimation']
+IntraList = ['Intra', 'xUpdateCandList']
+IList = ['SSE', 'SAD', 'HAD']
 
 def parseAnnotate(hmConfig, memoryConfig):
 	header = hmConfig + memoryConfig + "\tIr\tDr\tDw\tI1mr\tD1mr\tD1mw\tILmr\tDLmr\tDLmw"
@@ -86,7 +90,6 @@ def parseAnnotate(hmConfig, memoryConfig):
 	lines = f.readlines()
 	words = lines[20].split() #PROGRAM TOTALS line
 	total = Function('PROGRAM TOTALS', words)
-	print >> csv, total.toString()
 
 	for i, line in enumerate(lines[25:]): #begin functions data
 		words = line.split()
@@ -106,24 +109,58 @@ def parseAnnotate(hmConfig, memoryConfig):
 			x = Function(name, words)
 			functionsList.append(x)
 			writeOutput(functionsList, i)
-			fclasse = name.split(':') #lembrete: método fica em fclasse[2]
-			fclass = fclasse[0]
+			nameList = name.split(':')
+			fClass = nameList[0]
 			
-			if fclass in classesDic:
-				myinstance = classesDic.get(fclass)
-				if myinstance is not None:
-					myinstance.accumulate(fclass, words)
+			if len(nameList) == 3: #functions with names class::method
+				fMethod = nameList[2]
+			else: #functions with short names
+				fMethod = ''
+				
+			if fClass in classesDic: #checks if the function can be sorted by its class
+				myInstance = classesDic.get(fClass)
+				if myInstance is not None:
+					if myInstance == Q:
+						if 'DeQuant' in fMethod: #case inside TComTrQuant
+							IQ.accumulate(fClass, words)
+						else:
+							myInstance.accumulate(fClass, words)
+					else:
+						myInstance.accumulate(fClass, words)
+			else: #for functions that need method evaluation
+				if PBI.match(fClass):
+					IT.accumulate(fClass, words)
+				else:	
+					if PB.match(fClass):
+						T.accumulate(fClass, words)
+			if 'init' in fMethod:
+				P.accumulate(fClass, words)
+			else:
+				if 'QT' in fMethod: #QuadTree
+					T.accumulate(fClass, words)
+				else:
+					if any(x in fMethod for x in IList): #methods used both in Intra and Inter pred modes
+						I.accumulate(fClass, words)
+					else:
+						if any(x in fMethod for x in InterList):
+							Inter.accumulate(fClass, words)
+							print fClass + '::' + fMethod
+						else:
+							if any(x in fMethod for x in IntraList):
+								Intra.accumulate(fClass, words)
 	#printing final results to csv
-	print >>csv, "\nFinal Results"
+	print >>csv, "\nRESULTS"
 	print >> csv, Entropy.toString()
 	print >> csv, Filter.toString()
 	print >> csv, Intra.toString()
 	print >> csv, Inter.toString()
+	print >> csv, I.toString()
 	print >> csv, IQ.toString()
 	print >> csv, Q.toString()
 	print >> csv, IT.toString()
 	print >> csv, T.toString()
 	print >> csv, P.toString()
+	print >> csv, total.toString()
 	f.close
     			
 def writeOutput(functionsList, i):
