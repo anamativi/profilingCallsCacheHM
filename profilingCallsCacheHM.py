@@ -75,12 +75,15 @@ IT = Function('InvTransf', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 T = Function('Transf', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 P = Function('Pre/Pos', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 
-classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Filter, 'TComTrQuant':Q, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT}
+classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Filter, 'TComTrQuant':T, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT}
 PBI = re.compile('partialButterflyInverse(\d+)')
 PB = re.compile('partialButterfly(\d+)')
 InterList = ['Inter', 'xGetComponentBits', 'xPatternRefinement', 'TZSearch', 'Mv', 'DPCM', 'xGetTemplateCost', 'Motion', 'MVP', 'xMergeEstimation']
 IntraList = ['Intra', 'xUpdateCandList']
 IList = ['SSE', 'SAD', 'HAD']
+ITList = ['xIT']
+TList = ['xT', 'Transform']
+QList = ['Quant']
 
 def parseAnnotate(hmConfig, memoryConfig):
 	header = hmConfig + memoryConfig + "\tIr\tDr\tDw\tI1mr\tD1mr\tD1mw\tILmr\tDLmr\tDLmw"
@@ -120,11 +123,17 @@ def parseAnnotate(hmConfig, memoryConfig):
 			if fClass in classesDic: #checks if the function can be sorted by its class
 				myInstance = classesDic.get(fClass)
 				if myInstance is not None:
-					if myInstance == Q:
+					if myInstance == T:
 						if 'DeQuant' in fMethod: #case inside TComTrQuant
 							IQ.accumulate(fClass, words)
 						else:
-							myInstance.accumulate(fClass, words)
+							if any(x in fMethod for x in QList):
+								Q.accumulate(fClass, words)
+							else:
+								if any(x in fMethod for x in ITList):
+									IT.accumulate(fClass, words)
+								else:
+									myInstance.accumulate(fClass, words)
 					else:
 						myInstance.accumulate(fClass, words)
 			else: #for functions that need method evaluation
@@ -144,7 +153,6 @@ def parseAnnotate(hmConfig, memoryConfig):
 					else:
 						if any(x in fMethod for x in InterList):
 							Inter.accumulate(fClass, words)
-							print fClass + '::' + fMethod
 						else:
 							if any(x in fMethod for x in IntraList):
 								Intra.accumulate(fClass, words)
