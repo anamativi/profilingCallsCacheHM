@@ -47,6 +47,9 @@ class Function:
 		self.DLmr = lista[7]
 		self.DLmw = lista[8]
 		
+	def __add__(self, other):
+		return Function(self.name, [self.Ir + other.Ir, self.Dr + other.Dr, self.Dw + other.Dw, self.I1mr + other.I1mr, self.D1mr + other.D1mr, self.D1mw + other.D1mw, self.ILmr + other.ILmr, self.DLmr + other.DLmr, self.DLmw + other.DLmw])   
+		
 	def toString(self):
 		return self.name + '\t' + str(self.Ir) + '\t' + str(self.Dr) + '\t' + str(self.Dw) + '\t' + str(self.I1mr) + '\t' + str(self.D1mr) + '\t' + str(self.D1mw) + '\t' + str(self.ILmr) + '\t' + str(self.DLmr) + '\t' + str(self.DLmw)
 	
@@ -66,23 +69,24 @@ class Function:
 #initialization of acc variables
 Entropy = Function('Entropy', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Filter = Function('Filter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-Inter = Function('Inter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-Intra = Function('Intra', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-I = Function('Inter/Intra', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 IQ = Function('InvQuant', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 Q = Function('Quant', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 IT = Function('InvTransf', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 T = Function('Transf', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 P = Function('Pre/Pos', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+Pred = Function('Pred', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+Inter = Function('Inter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+Intra = Function('Intra', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+I = Function('Inter/Intra', [0, 0, 0, 0, 0, 0, 0, 0, 0])
 
-classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Filter, 'TComTrQuant':T, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT}
+classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Filter, 'TComTrQuant':T, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT, 'fastFowardDst':T, 'FastInverseDst':IT, 'void':Filter}
 PBI = re.compile('partialButterflyInverse(\d+)')
 PB = re.compile('partialButterfly(\d+)')
 InterList = ['Inter', 'xGetComponentBits', 'xPatternRefinement', 'TZSearch', 'Mv', 'DPCM', 'xGetTemplateCost', 'Motion', 'MVP', 'xMergeEstimation']
 IntraList = ['Intra', 'xUpdateCandList']
-IList = ['SSE', 'SAD', 'HAD']
+IList = ['SSE', 'SAD', 'HAD', 'Available', 'ReferenceSamples']
 ITList = ['xIT']
-TList = ['xT', 'Transform']
+TList = ['xT', 'Transform', 'Dst']
 QList = ['Quant']
 
 def parseAnnotate(hmConfig, memoryConfig):
@@ -142,32 +146,35 @@ def parseAnnotate(hmConfig, memoryConfig):
 				else:	
 					if PB.match(fClass):
 						T.accumulate(fClass, words)
-			if 'init' in fMethod:
-				P.accumulate(fClass, words)
-			else:
-				if 'QT' in fMethod: #QuadTree
-					T.accumulate(fClass, words)
+				if 'init' in fMethod:
+					P.accumulate(fClass, words)
 				else:
-					if any(x in fMethod for x in IList): #methods used both in Intra and Inter pred modes
-						I.accumulate(fClass, words)
+					if 'QT' in fMethod: #QuadTree
+						T.accumulate(fClass, words)
 					else:
-						if any(x in fMethod for x in InterList):
-							Inter.accumulate(fClass, words)
+						if any(x in fMethod + fClass for x in IList): #methods used both in Intra and Inter pred modes
+							I.accumulate(fClass, words)
 						else:
-							if any(x in fMethod for x in IntraList):
-								Intra.accumulate(fClass, words)
+							if any(x in fMethod for x in InterList):
+								Inter.accumulate(fClass, words)
+							else:
+								if any(x in fMethod for x in IntraList):
+									Intra.accumulate(fClass, words)
+	
+	Pred = I + Intra + Inter
 	#printing final results to csv
-	print >>csv, "\nRESULTS"
+	print >>csv, "\nRESULTS\tIr\tDr\tDw\tI1mr\tD1mr\tD1mw\tILmr\tDLmr\tDLmw"
 	print >> csv, Entropy.toString()
 	print >> csv, Filter.toString()
-	print >> csv, Intra.toString()
-	print >> csv, Inter.toString()
-	print >> csv, I.toString()
 	print >> csv, IQ.toString()
 	print >> csv, Q.toString()
 	print >> csv, IT.toString()
 	print >> csv, T.toString()
 	print >> csv, P.toString()
+	print >> csv, Pred.toString()
+	print >> csv, Intra.toString()
+	print >> csv, Inter.toString()
+	print >> csv, I.toString()
 	print >> csv, total.toString()
 	f.close
     			
@@ -193,7 +200,7 @@ def codifica():
 
 											hmConfig = name + "_" + "_QP_" + qp + "_nF_" + nf
 											memoryConfig = "_MSizeL1_" + str(cSizeL1) +  "_AssL1_" + str(cAssL1) + "_MSizeLL_" + str(cSizeLL)+ "_AssLL_" + str(cAssLL) + "_Word_" + str(cWord)
-											hmSetup = "../../HM-16.2/bin/./TAppEncoderStatic -c " + profile + " -c " + video + " --QP=" + qp + " --SearchRange=" + sRange + " --FramesToBeEncoded=" + nf
+											hmSetup = "../../HM-16.2/bin/./TAppEncoderStatic -c " + profile + " -c " + video + " --QP=" + qp + " --SearchRange=" + sRange + " --FramesToBeEncoded=" + nf + '--RDOQ=0 --RDOQTS=0'
 											
 											callValgrind = "valgrind --tool=callgrind --simulate-cache=yes" + " --D1=" + str(cSizeL1) + "," + str(cAssL1) + "," + str(cWord) + " --LL=" + str(cSizeLL) + "," + str(cAssLL) + "," + str(cWord) + " --callgrind-out-file=" + out + "valgrind_" + hmConfig + memoryConfig + ".txt " + hmSetup
 
@@ -203,8 +210,8 @@ def codifica():
 											os.system(callAnnotate)
 											parseAnnotate(hmConfig, memoryConfig)
 				
-
-csv = open (out + "parsedResults.csv", 'w')
+currentTime = time.strftime("%H:%M:%S")
+csv = open (out + "parsedResults" + currentTime + ".csv", 'w')
 
 codifica()
 
