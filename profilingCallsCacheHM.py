@@ -37,15 +37,21 @@ cache_word = param[9]
 class Function:
 	def __init__(self, name, lista):
 		self.name = name
-		self.Ir = lista[0]
-		self.Dr = lista[1]
-		self.Dw = lista[2]
-		self.I1mr = lista[3]
-		self.D1mr = lista[4]
-		self.D1mw = lista[5]
-		self.ILmr = lista[6]
-		self.DLmr = lista[7]
-		self.DLmw = lista[8]
+		self.Ir = int(str(lista[0]).replace(',', ''))
+		self.Dr = int(str(lista[1]).replace(',', ''))
+		self.Dw = int(str(lista[2]).replace(',', ''))
+		self.I1mr = int(str(lista[3]).replace(',', ''))
+		self.D1mr = int(str(lista[4]).replace(',', ''))
+		self.D1mw = int(str(lista[5]).replace(',', ''))
+		self.ILmr = int(str(lista[6]).replace(',', ''))
+		self.DLmr = int(str(lista[7]).replace(',', ''))
+		self.DLmw = int(str(lista[8]).replace(',', ''))
+		self.Dmw = self.D1mw + self.DLmw
+		self.Dwh = self.Dw - self.Dmw		#data write hits only
+		self.Dmr = self.D1mr + self.DLmr	#total data read misses
+		self.Drh = self.Dr - self.Dmr		#data read hits only
+		self.Imr = self.I1mr + self.ILmr	#total instruction read misses
+		self.Irh = self.Ir - self.Imr		#instruction read hits only
 		
 	def __add__(self, other):
 		return Function(self.name, [self.Ir + other.Ir, self.Dr + other.Dr, self.Dw + other.Dw, self.I1mr + other.I1mr, self.D1mr + other.D1mr, self.D1mw + other.D1mw, self.ILmr + other.ILmr, self.DLmr + other.DLmr, self.DLmw + other.DLmw])   
@@ -54,30 +60,34 @@ class Function:
 		return self.name + '\t' + str(self.Ir) + '\t' + str(self.Dr) + '\t' + str(self.Dw) + '\t' + str(self.I1mr) + '\t' + str(self.D1mr) + '\t' + str(self.D1mw) + '\t' + str(self.ILmr) + '\t' + str(self.DLmr) + '\t' + str(self.DLmw)
 	
 	def accumulate(self, name, words):
-		self.Ir += int(words[0].replace(',', ''))
-		self.Dr += int(words[1].replace(',', ''))
-		self.Dw += int(words[2].replace(',', ''))
-		self.I1mr += int(words[3].replace(',', ''))
-		self.D1mr += int(words[4].replace(',', ''))
-		self.D1mw += int(words[5].replace(',', ''))
-		self.ILmr += int(words[6].replace(',', ''))
-		self.DLmr += int(words[7].replace(',', ''))
-		self.DLmw += int(words[8].replace(',', ''))
-			
-		return Function(self.name, [self.Ir, self.Dr, self.Dw, self.I1mr, self.D1mr, self.D1mw, self.ILmr, self.DLmr, self.DLmw])
+		self.Ir += int(words[0])
+		self.Dr += int(words[1])
+		self.Dw += int(words[2])
+		self.I1mr += int(words[3])
+		self.D1mr += int(words[4])
+		self.D1mw += int(words[5])
+		self.ILmr += int(words[6])
+		self.DLmr += int(words[7])
+		self.DLmw += int(words[8])
+		self.Dmw += self.D1mw + self.DLmw
+		self.Dwh += self.Dw - self.Dmw		#data write hits only
+		self.Dmr += self.D1mr + self.DLmr	#total data read misses
+		self.Drh += self.Dr - self.Dmr		#data read hits only
+		self.Imr += self.I1mr + self.ILmr	#total instruction read misses
+		self.Irh += self.Ir - self.Imr		#instruction read hits only
 	
 #initialization of acc variables
-Entropy = Function('Entropy', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-Filter = Function('Filter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-IQ = Function('InvQuant', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-Q = Function('Quant', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-IT = Function('InvTransf', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-T = Function('Transf', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-P = Function('Pre/Pos', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-Pred = Function('Pred', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-Inter = Function('Inter', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-Intra = Function('Intra', [0, 0, 0, 0, 0, 0, 0, 0, 0])
-I = Function('Inter/Intra', [0, 0, 0, 0, 0, 0, 0, 0, 0])
+Entropy = Function('Entropy', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Filter = Function('Filter', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+IQ = Function('InvQuant', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Q = Function('Quant', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+IT = Function('InvTransf', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+T = Function('Transf', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+P = Function('Pre/Pos', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Pred = Function('Pred', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Inter = Function('Inter', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Intra = Function('Intra', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+I = Function('Inter/Intra', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
 
 classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Filter, 'TComTrQuant':T, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT, 'fastFowardDst':T, 'FastInverseDst':IT, 'void':Filter}
 PBI = re.compile('partialButterflyInverse(\d+)')
@@ -105,8 +115,9 @@ def parseAnnotate(hmConfig, memoryConfig):
 			break
 		else:
 			for x in range(0,9): #treatment for '.' cases, when there's no value
+				words[x] = words[x].replace(',' , '')
 				if words[x] == ".":
-					words[x] = "0"
+					words[x] = '0'
 		#BEGIN NOJEIRA
 			name = words[9]
 			name = name.strip("?:")
@@ -118,6 +129,7 @@ def parseAnnotate(hmConfig, memoryConfig):
 			writeOutput(functionsList, i)
 			nameList = name.split(':')
 			fClass = nameList[0]
+			print x.name
 			
 			if len(nameList) == 3: #functions with names class::method
 				fMethod = nameList[2]
@@ -160,7 +172,6 @@ def parseAnnotate(hmConfig, memoryConfig):
 							else:
 								if any(x in fMethod for x in IntraList):
 									Intra.accumulate(fClass, words)
-	
 	Pred = I + Intra + Inter
 	#printing final results to csv
 	print >>csv, "\nRESULTS\tIr\tDr\tDw\tI1mr\tD1mr\tD1mw\tILmr\tDLmr\tDLmw"
@@ -200,7 +211,7 @@ def codifica():
 
 											hmConfig = name + "_" + "_QP_" + qp + "_nF_" + nf
 											memoryConfig = "_MSizeL1_" + str(cSizeL1) +  "_AssL1_" + str(cAssL1) + "_MSizeLL_" + str(cSizeLL)+ "_AssLL_" + str(cAssLL) + "_Word_" + str(cWord)
-											hmSetup = "../../HM-16.2/bin/./TAppEncoderStatic -c " + profile + " -c " + video + " --QP=" + qp + " --SearchRange=" + sRange + " --FramesToBeEncoded=" + nf + '--RDOQ=0 --RDOQTS=0'
+											hmSetup = "../../HM-16.2/bin/./TAppEncoderStatic -c " + profile + " -c " + video + " --QP=" + qp + " --SearchRange=" + sRange + " --FramesToBeEncoded=" + nf# + '--RDOQ=0 --RDOQTS=0'
 											
 											callValgrind = "valgrind --tool=callgrind --simulate-cache=yes" + " --D1=" + str(cSizeL1) + "," + str(cAssL1) + "," + str(cWord) + " --LL=" + str(cSizeLL) + "," + str(cAssLL) + "," + str(cWord) + " --callgrind-out-file=" + out + "valgrind_" + hmConfig + memoryConfig + ".txt " + hmSetup
 

@@ -1,6 +1,6 @@
 ../../HM-16.2/cfg/encoder_lowdelay_main.cfg,
 ../../HM-16.2/cfg/per-sequence/BasketballDrill.cfg,
-16,
+32,
 32,
 32,
 8192,
