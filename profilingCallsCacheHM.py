@@ -23,16 +23,16 @@ for n in lines:
 	l.pop()
 	param.append(l)
 
-profiles = param[0]
-videos = param[1]
-nFs = param[2]
-QPs = param[3]
-sRanges = param[4]
-size_L1 = param[5]
-size_Ll = param[6]
-ass_L1 = param[7]
-ass_Ll = param[8]
-cache_word = param[9]
+profiles	= param[0]
+videos		= param[1]
+nFs			= param[2]
+QPs			= param[3]
+sRanges		= param[4]
+size_L1		= param[5]
+size_Ll		= param[6]
+ass_L1		= param[7]
+ass_Ll		= param[8]
+cache_word	= param[9]
 
 class Function:
 	def __init__(self, name, lista):
@@ -77,19 +77,19 @@ class Function:
 		self.Irh += self.Ir - self.Imr		#instruction read hits only
 	
 #initialization of acc variables
-Entropy = Function('Entropy', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-Filter = Function('Filter', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-IQ = Function('InvQuant', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-Q = Function('Quant', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-IT = Function('InvTransf', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-T = Function('Transf', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-P = Function('Pre/Pos', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-Pred = Function('Pred', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-Inter = Function('Inter', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-Intra = Function('Intra', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-I = Function('Inter/Intra', ['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Entropy =	Function('Entropy',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Filter =	Function('Filter',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+IQ =		Function('InvQuant',	['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Q =			Function('Quant',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+IT =		Function('InvTransf',	['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+T =			Function('Transf',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+P =			Function('Pre/Pos',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Pred =		Function('Pred',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Inter =		Function('Inter',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Intra =		Function('Intra',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+I =			Function('Inter/Intra',	['0', '0', '0', '0', '0', '0', '0', '0', '0'])
 
-classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Filter, 'TComTrQuant':T, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT, 'fastFowardDst':T, 'FastInverseDst':IT, 'void':Filter}
+classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Inter, 'TComTrQuant':T, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT, 'fastFowardDst':T, 'FastInverseDst':IT, 'void':Inter}
 PBI = re.compile('partialButterflyInverse(\d+)')
 PB = re.compile('partialButterfly(\d+)')
 InterList = ['Inter', 'xGetComponentBits', 'xPatternRefinement', 'TZSearch', 'Mv', 'DPCM', 'xGetTemplateCost', 'Motion', 'MVP', 'xMergeEstimation']
@@ -129,7 +129,6 @@ def parseAnnotate(hmConfig, memoryConfig):
 			writeOutput(functionsList, i)
 			nameList = name.split(':')
 			fClass = nameList[0]
-			print x.name
 			
 			if len(nameList) == 3: #functions with names class::method
 				fMethod = nameList[2]
