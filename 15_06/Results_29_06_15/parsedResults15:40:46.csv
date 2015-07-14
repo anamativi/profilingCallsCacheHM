@@ -1,0 +1,5 @@
+BasketballDrill__QP_32_nF_32_MSizeL1_8192_AssL1_1_MSizeLL_4194304_AssLL_1_Word_32	Ir	Dr	Dw	I1mr	D1mr	D1mw	ILmr	DLmr	DLmw
+TVideoIOYuv::read	4238958	623208	604489	32	9694	40781	31	1	38400
+/build/buildd/eglibc-2.19/malloc/malloc.c:_int_malloc	1462904	276140	286909	586	7891	14895	155	71	8808
+/build/buildd/eglibc-2.19/string/../sysdeps/i386/i686/multiarch/memcpy-ssse3.S:__memcpy_ssse3	1203594	401188	380095	584	180202	167272	214	107692	158502
+TComRdCost::xCalcHADs8x8	1140900	430102	272340	17	4662	1126	17	0	0

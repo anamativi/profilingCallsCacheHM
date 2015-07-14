@@ -9,7 +9,7 @@ import re
 proj = sys.argv[1]
 param = []
 functionsList = []
-out = "Results_" + time.strftime("%d_%m_%y") + "/"
+out = time.strftime("%y_%m") + "/" + time.strftime("%d") + "/"
 
 os.system("mkdir --p " + out) #creates results folder, if it insnt there already
 
@@ -99,7 +99,7 @@ ITList = ['xIT']
 TList = ['xT', 'Transform', 'Dst']
 QList = ['Quant']
 
-def parseAnnotate(hmConfig, memoryConfig):
+def parseAnnotate(csv, hmConfig, memoryConfig):
 	header = hmConfig + memoryConfig + "\tIr\tDr\tDw\tI1mr\tD1mr\tD1mw\tILmr\tDLmr\tDLmw"
 	print >> csv, header  #print header
 
@@ -126,7 +126,7 @@ def parseAnnotate(hmConfig, memoryConfig):
 		#END NOJEIRA
 			x = Function(name, words)
 			functionsList.append(x)
-			writeOutput(functionsList, i)
+			writeOutput(csv, functionsList, i)
 			nameList = name.split(':')
 			fClass = nameList[0]
 			
@@ -188,7 +188,7 @@ def parseAnnotate(hmConfig, memoryConfig):
 	print >> csv, total.toString()
 	f.close
     			
-def writeOutput(functionsList, i):
+def writeOutput(csv, functionsList, i):
 	print >> csv, functionsList[i].toString() #print line: each line is an object
 
 def codifica():
@@ -207,10 +207,12 @@ def codifica():
 											name = video.split("/")
 											name = name[5].split(".")
 											name = name[0]
-
+											
 											hmConfig = name + "_" + "_QP_" + qp + "_nF_" + nf
 											memoryConfig = "_MSizeL1_" + str(cSizeL1) +  "_AssL1_" + str(cAssL1) + "_MSizeLL_" + str(cSizeLL)+ "_AssLL_" + str(cAssLL) + "_Word_" + str(cWord)
 											hmSetup = "../../HM-16.2/bin/./TAppEncoderStatic -c " + profile + " -c " + video + " --QP=" + qp + " --SearchRange=" + sRange + " --FramesToBeEncoded=" + nf# + '--RDOQ=0 --RDOQTS=0'
+											
+											csv = open (out + hmConfig + memoryConfig + ".csv", 'w')
 											
 											callValgrind = "valgrind --tool=callgrind --simulate-cache=yes" + " --D1=" + str(cSizeL1) + "," + str(cAssL1) + "," + str(cWord) + " --LL=" + str(cSizeLL) + "," + str(cAssLL) + "," + str(cWord) + " --callgrind-out-file=" + out + "valgrind_" + hmConfig + memoryConfig + ".txt " + hmSetup
 
@@ -218,11 +220,9 @@ def codifica():
 
 											callAnnotate = "callgrind_annotate --auto=yes "+ out + "valgrind_" + hmConfig + memoryConfig + ".txt >" + out + "annotate_" + hmConfig + memoryConfig + ".txt"
 											os.system(callAnnotate)
-											parseAnnotate(hmConfig, memoryConfig)
+											parseAnnotate(csv, hmConfig, memoryConfig)
+											
+											csv.close()
 				
-currentTime = time.strftime("%H:%M:%S")
-csv = open (out + "parsedResults" + currentTime + ".csv", 'w')
 
 codifica()
-
-csv.close()
