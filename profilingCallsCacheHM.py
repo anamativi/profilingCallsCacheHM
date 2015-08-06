@@ -37,27 +37,33 @@ cache_word	= param[9]
 class Function:
 	def __init__(self, name, lista):
 		self.name = name
-		self.Ir = int(str(lista[0]).replace(',', ''))
-		self.Dr = int(str(lista[1]).replace(',', ''))
-		self.Dw = int(str(lista[2]).replace(',', ''))
-		self.I1mr = int(str(lista[3]).replace(',', ''))
-		self.D1mr = int(str(lista[4]).replace(',', ''))
-		self.D1mw = int(str(lista[5]).replace(',', ''))
-		self.ILmr = int(str(lista[6]).replace(',', ''))
-		self.DLmr = int(str(lista[7]).replace(',', ''))
-		self.DLmw = int(str(lista[8]).replace(',', ''))
-		self.Dmw = self.D1mw + self.DLmw
-		self.Dwh = self.Dw - self.Dmw		#data write hits only
-		self.Dmr = self.D1mr + self.DLmr	#total data read misses
-		self.Drh = self.Dr - self.Dmr		#data read hits only
-		self.Imr = self.I1mr + self.ILmr	#total instruction read misses
-		self.Irh = self.Ir - self.Imr		#instruction read hits only
+		self.Ir		= int(str(lista[0]).replace(',', ''))
+		self.Dr		= int(str(lista[1]).replace(',', ''))
+		self.Dw		= int(str(lista[2]).replace(',', ''))
+		self.I1mr	= int(str(lista[3]).replace(',', ''))
+		self.D1mr	= int(str(lista[4]).replace(',', ''))
+		self.D1mw	= int(str(lista[5]).replace(',', ''))
+		self.ILmr	= int(str(lista[6]).replace(',', ''))
+		self.DLmr	= int(str(lista[7]).replace(',', ''))
+		self.DLmw	= int(str(lista[8]).replace(',', ''))
+		self.Dmw	= self.D1mw + self.DLmw
+		self.Dwh	= self.Dw - self.Dmw		#data write hits only
+		self.Dmr	= self.D1mr + self.DLmr	#total data read misses
+		self.Drh	= self.Dr - self.Dmr		#data read hits only
+		self.Imr	= self.I1mr + self.ILmr	#total instruction read misses
+		self.Irh	= self.Ir - self.Imr		#instruction read hits only
+		self.L1Rate	= (self.I1mr + self.D1mr + self.D1mw) / ((self.Ir + self.Dr + self.Dw) * 0.01)
+		self.I1Rate	= (self.I1mr) / ((self.Ir)* 0.01)
+		self.D1Rate	= (self.D1mr + self.D1mw) / ((self.Dr + self.Dw)* 0.01)
+		self.LLRate	= (self.ILmr + self.DLmr + self.DLmw) / ((self.Ir + self.Dr + self.Dw)* 0.01)
+		self.ILRate	= (self.ILmr) / ((self.Ir) *0.01)
+		self.DLRate	= (self.DLmr + self.DLmw) / ((self.Dr + self.Dw)* 0.01)
 		
 	def __add__(self, other):
-		return Function(self.name, [self.Ir + other.Ir, self.Dr + other.Dr, self.Dw + other.Dw, self.I1mr + other.I1mr, self.D1mr + other.D1mr, self.D1mw + other.D1mw, self.ILmr + other.ILmr, self.DLmr + other.DLmr, self.DLmw + other.DLmw])   
-		
+		return Function(self.name, [self.Ir + other.Ir, self.Dr + other.Dr, self.Dw + other.Dw, self.I1mr + other.I1mr, self.D1mr + other.D1mr, self.D1mw + other.D1mw, self.ILmr + other.ILmr, self.DLmr + other.DLmr, self.DLmw + other.DLmw])   	
+	
 	def toString(self):
-		return self.name + '\t' + str(self.Ir) + '\t' + str(self.Dr) + '\t' + str(self.Dw) + '\t' + str(self.I1mr) + '\t' + str(self.D1mr) + '\t' + str(self.D1mw) + '\t' + str(self.ILmr) + '\t' + str(self.DLmr) + '\t' + str(self.DLmw)
+		return self.name + '\t' + str(self.Ir) + '\t' + str(self.Dr) + '\t' + str(self.Dw) + '\t' + str(self.I1mr) + '\t' + str(self.D1mr) + '\t' + str(self.D1mw) + '\t' + str(self.ILmr) + '\t' + str(self.DLmr) + '\t' + str(self.DLmw) + '\t' + str(self.L1Rate) + ' %\t' + str(self.I1Rate) + ' %\t' + str(self.D1Rate) + ' %\t' + str(self.LLRate) + ' %\t' + str(self.ILRate) + ' %\t' + str(self.DLRate) + ' %'
 	
 	def accumulate(self, name, words):
 		self.Ir += int(words[0])
@@ -77,17 +83,17 @@ class Function:
 		self.Irh += self.Ir - self.Imr		#instruction read hits only
 	
 #initialization of acc variables
-Entropy =	Function('Entropy',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-Filter =	Function('Filter',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-IQ =		Function('InvQuant',	['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-Q =			Function('Quant',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-IT =		Function('InvTransf',	['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-T =			Function('Transf',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-P =			Function('Pre/Pos',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-Pred =		Function('Pred',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-Inter =		Function('Inter',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-Intra =		Function('Intra',		['0', '0', '0', '0', '0', '0', '0', '0', '0'])
-I =			Function('Inter/Intra',	['0', '0', '0', '0', '0', '0', '0', '0', '0'])
+Entropy =	Function('Entropy',		['1', '1', '1', '1', '1', '1', '1', '1', '1'])
+Filter =	Function('Filter',		['1', '1', '1', '1', '1', '1', '1', '1', '1'])
+IQ =		Function('InvQuant',	['1', '1', '1', '1', '1', '1', '1', '1', '1'])
+Q =			Function('Quant',		['1', '1', '1', '1', '1', '1', '1', '1', '1'])
+IT =		Function('InvTransf',	['1', '1', '1', '1', '1', '1', '1', '1', '1'])
+T =			Function('Transf',		['1', '1', '1', '1', '1', '1', '1', '1', '1'])
+P =			Function('Pre/Pos',		['1', '1', '1', '1', '1', '1', '1', '1', '1'])
+Pred =		Function('Pred',		['1', '1', '1', '1', '1', '1', '1', '1', '1'])
+Inter =		Function('Inter',		['1', '1', '1', '1', '1', '1', '1', '1', '1'])
+Intra =		Function('Intra',		['1', '1', '1', '1', '1', '1', '1', '1', '1'])
+I =			Function('Inter/Intra',	['1', '1', '1', '1', '1', '1', '1', '1', '1'])
 
 classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Inter, 'TComTrQuant':T, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT, 'fastFowardDst':T, 'FastInverseDst':IT, 'void':Inter}
 PBI = re.compile('partialButterflyInverse(\d+)')
@@ -100,7 +106,7 @@ TList = ['xT', 'Transform', 'Dst']
 QList = ['Quant']
 
 def parseAnnotate(csv, hmConfig, memoryConfig):
-	header = hmConfig + memoryConfig + "\tIr\tDr\tDw\tI1mr\tD1mr\tD1mw\tILmr\tDLmr\tDLmw"
+	header = hmConfig + memoryConfig + "\tIr\tDr\tDw\tI1mr\tD1mr\tD1mw\tILmr\tDLmr\tDLmw\tL1Rate\tI1Rate\tD1Rate\tLLRate\tILRate\tDLRate"
 	print >> csv, header  #print header
 
 	f = open(out + "annotate_" + hmConfig + memoryConfig + ".txt")
@@ -123,7 +129,9 @@ def parseAnnotate(csv, hmConfig, memoryConfig):
 			name = name.strip("?:")
 			name = name.split("(")
 			name = name[0]
+
 		#END NOJEIRA
+			
 			x = Function(name, words)
 			functionsList.append(x)
 			writeOutput(csv, functionsList, i)
@@ -188,7 +196,7 @@ def parseAnnotate(csv, hmConfig, memoryConfig):
 	print >> csv, total.toString()
 	f.close
     			
-def writeOutput(csv, functionsList, i):
+def writeOutput(csv, functionsList, i): 
 	print >> csv, functionsList[i].toString() #print line: each line is an object
 
 def codifica():

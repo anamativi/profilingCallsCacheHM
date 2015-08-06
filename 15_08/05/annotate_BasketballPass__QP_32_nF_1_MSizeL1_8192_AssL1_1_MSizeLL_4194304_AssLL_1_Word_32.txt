@@ -1,0 +1,171 @@
+--------------------------------------------------------------------------------
+Profile data file '15_08/05/valgrind_BasketballPass__QP_32_nF_1_MSizeL1_8192_AssL1_1_MSizeLL_4194304_AssLL_1_Word_32.txt' (creator: callgrind-3.10.0.SVN)
+--------------------------------------------------------------------------------
+I1 cache: 32768 B, 64 B, 8-way associative
+D1 cache: 8192 B, 32 B, direct-mapped
+LL cache: 4194304 B, 32 B, direct-mapped
+Timerange: Basic block 0 - 617773369
+Trigger: Program termination
+Profiled target:  ../../HM-16.2/bin/./TAppEncoderStatic -c ../../HM-16.2/cfg/encoder_lowdelay_main.cfg -c ../../HM-16.2/cfg/per-sequence/BasketballPass.cfg --QP=32 --SearchRange=32 --FramesToBeEncoded=1 (PID 5198, part 1)
+Events recorded:  Ir Dr Dw I1mr D1mr D1mw ILmr DLmr DLmw
+Events shown:     Ir Dr Dw I1mr D1mr D1mw ILmr DLmr DLmw
+Event sort order: Ir Dr Dw I1mr D1mr D1mw ILmr DLmr DLmw
+Thresholds:       99 0 0 0 0 0 0 0 0
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+           Ir            Dr            Dw       I1mr        D1mr       D1mw    ILmr    DLmr    DLmw 
+--------------------------------------------------------------------------------
+5,094,541,803 1,989,575,004 1,053,708,980 54,559,143 112,201,885 84,330,263 145,752 305,748 454,990  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+         Ir          Dr          Dw      I1mr       D1mr       D1mw    ILmr    DLmr    DLmw  file:function
+--------------------------------------------------------------------------------
+963,873,099 365,701,539 204,934,099 7,230,414 21,843,687 22,313,052     183   2,384   6,612  ???:TComTrQuant::xRateDistOptQuant(TComTU&, int*, int*, int*, int&, ComponentID, QpParam const&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+431,833,920 162,789,760 103,046,720    35,003    585,575  1,250,963      17       7     258  ???:TComRdCost::xCalcHADs8x8(short*, short*, int, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+366,870,838 113,882,567  51,783,842 1,151,593  2,580,364  2,507,998      37       4   4,131  ???:TComPrediction::xPredIntraAng(int, short const*, int, short*, int, unsigned int, unsigned int, ChannelType, ChromaFormat, unsigned int, bool, bool, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+287,001,264 107,175,408  59,651,154 4,013,854  7,224,423  3,825,328      72   2,535  16,292  ???:TEncSearch::xIntraCodingTUBlock(TComYuv*, TComYuv*, TComYuv*, short (*) [4096], bool, unsigned int&, ComponentID, TComTU&, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+284,052,014  82,554,372  64,071,282   963,104 20,231,788 19,061,941 135,642 108,176 184,579  /build/buildd/eglibc-2.19/string/../sysdeps/i386/i686/multiarch/memcpy-ssse3.S:__memcpy_ssse3 [/lib/i386-linux-gnu/libc-2.19.so]
+138,927,479  49,588,791  37,718,928 1,913,999  1,596,287    726,567      50     469     924  ???:TEncSbac::codeCoeffNxN(TComTU&, int*, ComponentID) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+121,272,668  39,168,144  10,496,172    33,057    980,268     51,398       5      25       .  ???:TComTrQuant::getSigCtxInc(int, TUEntropyCodingParameters const&, int, int, int, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 97,314,642  53,531,172   7,014,060    38,524    849,998    284,632      47     110       .  ???:partialButterflyInverse32(int*, int*, int, int, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 82,992,000  30,794,400  17,908,800   116,827     12,142    865,638      20      27       .  ???:TComRdCost::xCalcHADs4x4(short*, short*, int, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 82,141,639  23,149,387  11,001,163 1,613,816  1,112,105  1,574,846      51   3,340   2,056  ???:fillReferenceSamples(int, TComDataCU*, short const*, short*, bool const*, int, int, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, int, ChannelType, ChromaFormat) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 79,624,932  30,086,769   4,720,824   452,710    179,540    430,879      12       9       .  ???:TComTrQuant::xDeQuant(TComTU&, int const*, int*, ComponentID, QpParam const&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 76,028,058  43,564,176   4,570,020    28,380  1,266,570    434,177      37     140  10,624  ???:partialButterfly32(int*, int*, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 72,329,247  34,825,193  21,430,888   126,018  2,244,612    163,715       2     907      40  ???:TEncBinCABACCounter::encodeBin(unsigned int, ContextModel&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 61,802,420  28,296,780   7,461,340   298,322    140,780    398,722       9       1       4  ???:fastForwardDst(int*, int*, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 58,275,510  29,565,920   7,661,900   372,699    343,399    650,348      17      42   1,196  ???:partialButterfly8(int*, int*, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 57,627,031  19,926,088  20,145,527 1,160,383  1,230,763    906,050      15     154     116  ???:TEncSbac::codeIntraDirLumaAng(TComDataCU*, unsigned int, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 56,761,072  22,107,920  11,251,036   281,002    782,450    869,161       8       3      21  ???:TEncSbac::estSignificantCoefficientsBit(estBitsSbacStruct*, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 55,094,103  16,113,134  12,258,289   751,247  1,004,471  2,776,080     560   1,347  90,974  /build/buildd/eglibc-2.19/string/../sysdeps/i386/i686/multiarch/memset-sse2.S:__memset_sse2 [/lib/i386-linux-gnu/libc-2.19.so]
+ 54,170,268  11,755,728  15,193,680   423,668    256,631  6,795,612      41     107  31,233  /build/buildd/eglibc-2.19/string/../sysdeps/i386/i686/multiarch/memset-sse2.S:__memset_chk_sse2 [/lib/i386-linux-gnu/libc-2.19.so]
+ 53,132,520  30,978,920   4,436,740   102,546    212,320    230,255      36     208      98  ???:partialButterflyInverse16(int*, int*, int, int, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 52,714,150  21,029,748   8,711,428   891,751    916,756    520,072      11     478      19  ???:TEncSbac::estLastSignificantPositionBit(estBitsSbacStruct*, int, int, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 48,813,336  25,818,624   5,989,176   251,857    274,475    404,570      20      40     142  ???:partialButterflyInverse8(int*, int*, int, int, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 47,140,956  25,394,208   4,258,656    57,791    150,932    297,180      26      86   2,413  ???:partialButterfly16(int*, int*, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 44,138,622  17,909,348  11,730,742   390,650  1,622,187    232,499      12      30       8  ???:TComPrediction::predIntraAng(ComponentID, unsigned int, short*, unsigned int, short*, unsigned int, TComTU&, bool, bool, bool, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 44,003,562  44,003,562           0         3          0          0       1       .       .  ???:__x86.get_pc_thunk.bx [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 43,824,200   5,185,800     178,000    46,356    414,020          0       2   1,908       .  ???:TEncEntropy::countNonZeroCoeffs(int*, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 41,562,080  13,777,563  10,839,862   870,114  1,189,345     86,822      13   3,011      86  ???:TComDataCU::getIntraDirPredictor(unsigned int, int*, ComponentID, int*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 39,849,169  15,400,292  11,525,289 1,010,445  1,344,220    935,087      28     304   1,439  ???:TComPrediction::initAdiPatternChType(TComTU&, bool&, bool&, ComponentID, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 39,574,552   9,787,256   7,920,952   583,768    901,192  1,021,727       5       4   6,240  ???:TComTrQuant::xT(ComponentID, bool, short*, unsigned int, int*, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 36,486,628  13,505,327   6,442,884   776,061  1,152,557    723,258       8     461      45  ???:TEncSbac::estSignificantMapBit(estBitsSbacStruct*, int, int, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 34,592,822  12,007,399  16,647,632   800,179  2,285,001  1,146,745      82   2,243     828  ???:TEncSearch::estIntraPredQT(TComDataCU*, TComYuv*, TComYuv*, TComYuv*, TComYuv*, short (*) [4096], unsigned int&, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 32,362,809  13,177,684  10,410,302 1,908,325  3,495,937  1,448,191      56      48     480  ???:TEncSearch::xRecurIntraCodingQT(bool, TComYuv*, TComYuv*, TComYuv*, short (*) [4096], unsigned int&, unsigned int&, bool, double&, TComTU&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 30,002,636  14,319,445   6,842,941   487,273    477,589    151,913       6     802     352  ???:TComDataCU::getPUAbove(unsigned int&, unsigned int, bool, bool, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 29,845,725  11,728,920   8,824,305    47,735    292,446    105,548       9       .       .  ???:TComRdCost::xGetHADs(DistParam*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 29,471,850  11,375,100   6,549,300   603,902     72,247    112,529       5     232       .  ???:TComRdCost::xGetSSE4(DistParam*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 27,861,120  12,935,520   6,567,264 1,252,747  1,867,825    807,437       9     608      20  ???:TEncSbac::estCBFBit(estBitsSbacStruct*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 27,632,193  13,849,768   5,680,460   412,353    778,838     93,768       6   1,210     153  ???:TComDataCU::getPULeft(unsigned int&, unsigned int, bool, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 27,022,962  11,586,189   6,646,425   859,670  1,112,737    805,825       9      82     841  ???:getTUEntropyCodingParameters(TUEntropyCodingParameters&, TComTU&, ComponentID) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 26,639,306  11,907,094   5,926,758   271,818    218,080    180,272      11       0       1  ???:TComTURecurse::nextSection(TComTU const&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 25,874,261  11,421,918   4,495,846   238,445     37,898    275,064      10       0   3,062  ???:TComPrediction::xPredIntraPlanar(short const*, int, short*, int, unsigned int, unsigned int, ChannelType, ChromaFormat) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 25,603,808  12,362,664   9,858,008 1,423,231    869,234    124,180      11      31       .  ???:TComTrQuant::transformNxN(TComTU&, ComponentID, short*, unsigned int, int*, int*, int&, QpParam const&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 23,956,200  11,871,628   3,087,688   156,012     34,583    186,326       9       1       .  ???:fastInverseDst(int*, int*, int, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 23,674,560  10,920,000   4,193,280    61,314    144,860    268,603       7      10     538  ???:partialButterfly4(int*, int*, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 23,479,630   5,235,338   4,817,579   337,122    412,667    390,136      61       6     403  ???:TComTrQuant::xIT(ComponentID, bool, int*, short*, unsigned int, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 22,692,075   8,435,018   4,593,710   359,185    470,890     28,281      12      48       .  ???:TComYuv::copyPartToPartComponent(ComponentID, TComYuv*, unsigned int, unsigned int, unsigned int) const [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 22,266,636   8,211,831   4,395,210   509,164    648,186     80,892      24      98     389  ???:TEncSearch::xLoadIntraResultQT(ComponentID, ComponentID, TComTU&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 21,451,658  21,451,658           0     2,529          0          0      44       .       .  /build/buildd/eglibc-2.19/string/../sysdeps/i386/i686/multiarch/strcat.S:0x0012694b [/lib/i386-linux-gnu/libc-2.19.so]
+ 19,729,866   4,863,928   1,293,579   406,588    804,802    233,094       4       6      94  ???:TComPrediction::filteringIntraReferenceSamples(ComponentID, unsigned int, unsigned int, unsigned int, ChromaFormat, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 19,034,462   4,978,347   2,574,159    27,774    281,840      2,835       3      71       .  ???:TEncSearch::xUpdateCandList(unsigned int, double, unsigned int, unsigned int*, double*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 19,012,968   6,567,620   5,843,789   135,392    266,701    229,657      11      11   1,186  ???:TComTU::TComTU(TComTU&, bool, TComTU::TU_SPLIT_MODE, bool, ComponentID) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 18,475,059   6,049,251   3,512,409        61    929,044     36,215      61   8,609   6,713  ???:TEncSampleAdaptiveOffset::getBlkStats(ComponentID, SAOStatData*, short*, short*, int, int, int, int, bool, bool, bool, bool, bool, bool, bool, bool, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 18,367,294   9,112,746   3,840,742   286,221    737,439     26,215      10     357       7  ???:TComDataCU::getPUAboveRightAdi(unsigned int&, unsigned int, unsigned int, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 17,268,240   9,353,630   7,195,100    58,361    928,424    521,210       2      20     294  ???:TEncBinCABAC::copyState(TEncBinIf const*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 16,544,293   8,472,206   3,724,993   211,875    663,928     14,769       8   1,185       .  ???:TComDataCU::getPUBelowLeftAdi(unsigned int&, unsigned int, unsigned int, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 15,685,110   8,423,485   6,099,765    32,313  1,554,339      5,985       4     192       .  ???:TEncSearch::xModeBitsIntra(TComDataCU*, unsigned int, unsigned int, unsigned int, unsigned int, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 14,847,361   5,422,136   1,728,048   610,397    593,562    143,893       7      77      90  ???:TComDataCU::getCoefScanIdx(unsigned int, unsigned int, unsigned int, ComponentID) const [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 14,746,875   6,095,375   3,735,875   701,489    456,464     84,853       6      13      69  ???:TEncSbac::codeQtCbf(TComTU&, ComponentID, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 13,729,637   5,425,567   3,078,626   415,728    409,094      6,946      15       4       .  ???:TEncSbac::codeLastSignificantXY(unsigned int, unsigned int, int, int, ComponentID, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 13,543,535   5,723,890   4,890,095   155,046    119,716     33,394       7     131       .  ???:TComRdCost::xGetSSE8(DistParam*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 12,871,350   5,148,540   5,148,540    26,815    777,287    191,990       2     127     119  ???:TEncSbac::xCopyContextsFrom(TEncSbac const*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 12,821,600   3,555,080   2,564,320   407,107     60,940    233,120       7       .       .  ???:TComTrQuant::xTransformSkip(short*, unsigned int, int*, TComTU&, ComponentID) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 11,227,495   4,208,493   3,309,008   328,473    124,681     16,936       3     128       .  ???:isLeftAvailable(TComDataCU*, unsigned int, unsigned int, bool*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 11,089,866   3,530,138   6,465,828   624,547     50,230    143,933       6       3       .  ???:TComRdCost::getDistPart(int, short*, int, short*, int, unsigned int, unsigned int, ComponentID, DFunc) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 10,945,440   4,975,200   3,582,144   190,075    113,163    586,199       4       0     494  ???:TComTrQuant::xQuant(TComTU&, int*, int*, int*, int&, ComponentID, QpParam const&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 10,897,732   3,930,656   3,881,062   413,052    498,578    172,811      48       6     360  ???:TEncSearch::xRecurIntraChromaCodingQT(TComYuv*, TComYuv*, TComYuv*, short (*) [4096], unsigned int&, TComTU&)'2 [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+ 10,149,408   3,184,128   6,368,256   110,356    199,008    329,000       4       0       4  ???:TEncSbac::estBit(estBitsSbacStruct*, int, int, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  9,973,361   4,094,053   2,962,293   668,354    483,125      8,927      15      45       .  ???:TEncSearch::xEncSubdivCbfQT(TComTU&, bool, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  9,886,274   4,019,372     496,358     8,420     21,774          0       4       .       .  ???:TComTrQuant::calcPatternSigCtx(unsigned int const*, unsigned int, unsigned int, unsigned int, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  9,738,078   3,268,140   3,402,243   448,690     80,530     68,942       4      19      68  ???:isAboveAvailable(TComDataCU*, unsigned int, unsigned int, bool*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  9,679,609   3,715,221   2,994,302   363,587     32,956     24,015       3       .       .  ???:isBelowLeftAvailable(TComDataCU*, unsigned int, unsigned int, bool*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  9,673,383   4,176,592   3,034,550   445,354    695,888     41,253       6  20,166       .  ???:QpParam::QpParam(TComDataCU const&, ComponentID) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  9,585,345   4,647,440   3,195,115    18,734  1,326,392      6,370       3     131       .  ???:TEncSbac::loadIntraDirMode(TEncSbac const*, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  9,438,990   4,290,450   4,290,450    71,344  1,191,740     90,158       2     167      82  ???:TEncSbac::xCopyFrom(TEncSbac const*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  9,297,610   3,954,116   1,342,117   344,016    449,521      3,941       4      58       9  ???:TComDataCU::getQuadtreeTULog2MinSizeInCU(unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  9,164,930   3,268,140   3,075,731   536,756     41,906     29,788       5       .       .  ???:isAboveRightAvailable(TComDataCU*, unsigned int, unsigned int, bool*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  9,112,282   4,325,662   2,788,731   524,993    382,477      2,936       8       .       .  ???:TEncSearch::xEncCoeffQT(TComTU&, ComponentID, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  9,059,580   4,166,487   3,859,557    39,900     66,737    208,724      11      57   1,144  ???:TComDataCU::initEstData(unsigned int, int, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  8,824,135   2,620,518   2,251,601   622,837    325,595    373,125      15      23     430  ???:xTrMxN(int, int*, int*, int, int, bool, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  8,536,408   3,858,601   4,198,018   319,302    459,514     13,928       6      20       .  ???:TEncSearch::xGetIntraBitsQT(TComTU&, bool, bool, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  8,534,400   4,413,504   1,267,968    90,000     16,823     73,152       8       3     133  ???:partialButterflyInverse4(int*, int*, int, int, int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  8,159,328   3,781,152   2,388,096   345,786    414,048    343,013       4       6     555  ???:TComTrQuant::rdpcmNxN(TComTU&, ComponentID, short*, unsigned int, QpParam const&, int*, int&, RDPCMMode&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  7,939,712   2,887,168   2,165,376    77,203      3,630         72       .       .       .  ???:TEncBinCABACCounter::encodeBinsEP(unsigned int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  7,717,140   3,387,339   3,275,181    18,348     92,603      7,833      22       .       .  ???:TComRdCost::xGetSSE32(DistParam*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  7,633,378   3,309,002   3,078,982    35,754     63,085      6,920      11       .       .  ???:TComRdCost::xGetSSE16(DistParam*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  7,562,304   3,781,152   1,990,080   290,524    240,650    199,008       2     181       4  ???:TEncSbac::estSignificantCoeffGroupMapBit(estBitsSbacStruct*, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  7,205,270   3,229,617   1,594,057   466,179    316,730    156,405      11      86     360  ???:TComDataCU::getPUAboveLeft(unsigned int&, unsigned int, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  6,963,062   2,845,664   1,823,990    69,318     11,567      3,846       6       .       .  ???:TEncSbac::xWriteCoefRemainExGolomb(unsigned int, unsigned int&, bool, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  6,932,710   2,475,068   2,553,512   275,871    332,855    138,384      10       3     450  ???:TEncSearch::xRecurIntraChromaCodingQT(TComYuv*, TComYuv*, TComYuv*, short (*) [4096], unsigned int&, TComTU&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  6,918,893   3,744,104     576,016   408,903    104,641          0       2       .       .  ???:TComTU::getGolombRiceStatisticsIndex(ComponentID) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  6,844,344   1,741,176   1,275,792         0    181,864    411,353       0      86       8  /build/buildd/eglibc-2.19/string/../sysdeps/i386/i686/multiarch/memcpy-ssse3.S:__memcpy_chk_ssse3 [/lib/i386-linux-gnu/libc-2.19.so]
+  6,819,384   2,360,556   1,442,562   216,910    368,011      1,203       5      85       .  ???:TComRdCost::calcRdCost(unsigned int, unsigned int, bool, DFunc) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  6,760,480   3,263,680   1,806,680   224,553    361,323        370       7       .       .  ???:TEncSearch::xStoreIntraResultQT(ComponentID, ComponentID, TComTU&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  6,755,024   3,799,701   1,688,756   102,763    176,010    104,938       2      14       .  ???:TEncBinCABACCounter::getNumWrittenBits() [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  6,113,378   1,590,776   1,194,048   294,201     98,585          0       3       7       .  ???:QpParam::QpParam(int, ChannelType, int, int, ChromaFormat) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,908,308   3,798,198   2,110,110    59,357    981,553      8,525       1     104      21  ???:TEncSbac::resetBits() [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,878,131   2,291,461   1,501,271   646,512    304,243     88,884      11      68      21  ???:TEncSearch::xEncIntraHeader(TComDataCU*, unsigned int, unsigned int, bool, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,777,979   2,812,413   2,149,977   335,196    124,171    126,928      10       .       .  ???:TComTrQuant::invTransformNxN(TComTU&, ComponentID, short*, unsigned int, int*, QpParam const&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,745,504   3,094,602   1,658,430   277,953     88,209    244,943       4       4      67  ???:TEncEntropy::encodeCoeffNxN(TComTU&, int*, ComponentID) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,578,559   2,299,810   1,231,497    17,335     78,103     18,700       0       0      46  ???:TEncSearch::xEncSubdivCbfQT(TComTU&, bool, bool)'2 [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,518,835   3,485,580     580,930    12,601    361,402          0       2       .       .  ???:TComPrediction::UseDPCMForFirstPassIntraEstimation(TComTU&, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,413,996   3,093,712   1,933,570    41,030     98,303      3,207       1       5       .  ???:TEncEntropy::encodeIntraDirModeLuma(TComDataCU*, unsigned int, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,317,439   1,959,120   1,579,026   227,711    245,424    115,414      35       3      53  ???:TEncSearch::xRecurIntraCodingQT(bool, TComYuv*, TComYuv*, TComYuv*, short (*) [4096], unsigned int&, unsigned int&, bool, double&, TComTU&)'2 [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,295,007   2,735,909   1,340,518    26,546    118,117      5,551       0       3       .  ???:TEncSearch::xEncCoeffQT(TComTU&, ComponentID, bool)'2 [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,265,800   2,738,216   1,474,424   187,276    537,375      7,760       2       0      29  ???:TComDataCU::setTransformSkipSubParts(unsigned int, ComponentID, unsigned int, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,064,264   1,266,066   2,954,154    43,260    105,706         28       1       .       .  ???:TEncBinCABAC::resetBits() [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  5,052,294     337,896   1,556,718    10,860     18,228     79,284       3      58   5,344  ???:TComCUMvField::clearMvField() [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  4,776,192   2,189,088   1,592,064     3,810    401,457    131,422       2      24       .  ???:TEncEntropy::estimateBit(estBitsSbacStruct*, int, int, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,982,772   1,334,364     298,998     4,568      6,330          0       3       .       .  ???:TComTrQuant::getSigCoeffGroupCtxInc(unsigned int const*, unsigned int, unsigned int, unsigned int, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,809,488   2,145,056     640,872   184,388    154,633     47,601       4     153      80  ???:TEncSbac::codeTransformSkipFlags(TComTU&, ComponentID) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,731,262   1,005,903   1,110,229   493,006     19,031    159,576      20       0      74  ???:xITrMxN(int, int*, int*, int, int, bool, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,705,097   1,684,135     336,827   120,547     60,535          0       1       .       .  ???:TComTU::GetEquivalentLog2TrSize(ComponentID) const [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,665,328   1,832,664   1,069,054   302,199    425,106          0       2       .       .  ???:TComDataCU::setTrIdxSubParts(unsigned int, unsigned int, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,588,786   1,794,393   1,196,262   100,145    290,432     91,668       2       2       .  ???:TComDataCU::setCbfPartRange(unsigned int, ComponentID, unsigned int, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,582,144   1,791,072   1,194,048   230,960    116,308    168,334       2       0     237  ???:TComDataCU::setExplicitRdpcmModePartRange(unsigned int, ComponentID, unsigned int, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,427,621   1,192,216   1,192,216   354,647    196,595    192,540       3 103,691     221  ???:isAboveLeftAvailable(TComDataCU*, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,388,209   2,059,905     397,802    30,988     25,701          0       1       .       .  ???:TComTU::useDST(ComponentID) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,383,136   1,791,072   1,194,048   198,307    204,628          0       1      69       .  ???:TComRdCost::setDistParam(unsigned int, unsigned int, DFunc, DistParam&) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,377,512   2,110,945     844,378         0     25,574      1,189       .       .       .  ???:TEncSbac::getNumberOfWrittenBits() [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,082,142     999,510     253,321        45    104,141     98,764      45     794   8,161  ???:TComSampleAdaptiveOffset::offsetBlock(ComponentID, int, int*, short*, short*, int, int, int, int, bool, bool, bool, bool, bool, bool, bool, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  3,039,570   1,255,229     618,412    15,515    122,584     22,700      15     572      60  ???:TEncEntropy::xEncodeTransform(bool&, bool&, TComTU&)'2 [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,983,656     994,552   1,243,190    12,097    141,784         69       2       0       1  ???:TEncSbac::load(TEncSbac const*) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,967,691   1,295,104   1,220,461   130,645    224,885     55,154      26      34     357  ???:TEncSearch::estIntraPredChromaQT(TComDataCU*, TComYuv*, TComYuv*, TComYuv*, TComYuv*, short (*) [4096], unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,903,326   1,069,390     463,534        45     40,353      7,670      45   3,103       .  ???:TComLoopFilter::xEdgeFilterLuma(TComDataCU*, unsigned int, unsigned int, DeblockEdgeDir, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,813,496     800,840     156,504    54,067     70,363     44,604       4       0     768  ???:TComPrediction::predIntraGetPredValDC(short const*, int, unsigned int, unsigned int, ChannelType, ChromaFormat, bool, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,792,812   1,152,460     740,267    41,432     57,582     12,519       8     184     128  ???:TComYuv::copyToPicComponent(ComponentID, TComPicYuv*, unsigned int, unsigned int, unsigned int, unsigned int) const [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,745,531     929,421     491,418    77,214        162     21,366       8       .       .  ???:TComTrQuant::xITransformSkip(int*, short*, unsigned int, TComTU&, ComponentID) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,631,650   1,368,458     736,862   139,995    296,700    112,253       2      20       .  ???:TComDataCU::setIntraDirSubParts(ChannelType, unsigned int, unsigned int, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,454,624     935,808   1,041,840    32,754     52,740     28,585      16      67     141  ???:TComDataCU::initSubCU(TComDataCU*, unsigned int, unsigned int, int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,385,480   1,171,184           0   229,985      1,763          0       1       .       .  ???:TComDataCU::getCtxQtCbf(TComTU&, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,368,702   1,353,544     845,965    72,357     55,214     21,800       1       .       .  ???:TEncEntropy::encodeQtCbf(TComTU&, ComponentID, bool) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,251,657     775,553     249,252    55,176     11,418          0       4       .       .  ???:TComPrediction::xDCPredFiltering(short const*, int, short*, int, int, int, ChannelType) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,164,884     721,628     902,035     3,574     98,169     29,051       0       0      83  ???:TEncSbac::store(TEncSbac*) const [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,089,975   1,309,248     191,486    36,306    111,103          0       3      88       .  ???:TComDataCU::CUIsFromSameSliceAndTile(TComDataCU const*) const [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  2,069,132     738,920     517,088    14,040     20,174      2,837       9      72      12  ???:TComYuv::copyToPartComponent(ComponentID, TComYuv*, unsigned int) const [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  1,859,112     963,984     413,136   200,005    103,731     43,389       3       .       .  ???:TComTrQuant::invRdpcmNxN(TComTU&, ComponentID, short*, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  1,772,820     886,410     590,940    22,225     50,254     19,175       1       .       .  ???:TComDataCU::setTransformSkipPartRange(unsigned int, ComponentID, unsigned int, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  1,772,820     886,410     590,940     6,132     31,333      3,476       1       .       .  ???:TComDataCU::setCrossComponentPredictionAlphaPartRange(char, ComponentID, unsigned int, unsigned int) [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+  1,681,668   1,121,112      93,426    15,110     41,876          0       2       .       .  ???:TComDataCU::CUIsFromSameTile(TComDataCU const*) const [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+
+--------------------------------------------------------------------------------
+The following files chosen for auto-annotation could not be found:
+--------------------------------------------------------------------------------
+  /build/buildd/eglibc-2.19/string/../sysdeps/i386/i686/multiarch/memcpy-ssse3.S
+  /build/buildd/eglibc-2.19/string/../sysdeps/i386/i686/multiarch/strcat.S
+  /build/buildd/eglibc-2.19/string/../sysdeps/i386/i686/multiarch/memset-sse2.S
+
