@@ -98,13 +98,13 @@ IQ =		Function('InvQuant',	nullList)
 Q =			Function('Quant',		nullList)
 IT =		Function('InvTransf',	nullList)
 T =			Function('Transf',		nullList)
-P =			Function('Pre/Pos',		nullList)
+P =			Function('Misc',		nullList)
 Pred =		Function('Pred',		nullList)
 Inter =		Function('Inter',		nullList)
 Intra =		Function('Intra',		nullList)
 I =			Function('Inter/Intra',	nullList)
 
-modules = [Entropy, Filter, IQ, Q, IT, T, P, I, Inter, Intra]
+modules = [Entropy, IQ, Q, IT, T, P, I, Inter, Intra, Filter]
 
 classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Inter, 'TComTrQuant':T, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT, 'fastFowardDst':T, 'FastInverseDst':IT, 'void':Inter}
 PBI = re.compile('partialButterflyInverse(\d+)')
@@ -236,6 +236,5 @@ def codifica():
 											parseAnnotate(csv, hmConfig, memoryConfig)
 											
 											csv.close()
-				
 
 codifica()

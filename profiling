@@ -1,0 +1,163 @@
+
+HM software: Encoder Version [16.2] (including RExt)[Linux][GCC 4.8.2][32 bit] 
+
+
+Input          File               : /home/mativi/origCfP/BasketballPass_416x240_50.yuv
+Bitstream      File               : str.bin
+Reconstruction File               : rec.yuv
+Real     Format                   : 416x240 50Hz
+Internal Format                   : 416x240 50Hz
+Sequence PSNR output              : Linear average only
+Sequence MSE output               : Disabled
+Frame MSE output                  : Disabled
+Cabac-zero-word-padding           : Disabled
+Frame/Field                       : Frame based coding
+Frame index                       : 0 - 1 (2 frames)
+Profile                           : main
+CU size / depth                   : 64 / 4
+RQT trans. size (min / max)       : 4 / 32
+Max RQT depth inter               : 3
+Max RQT depth intra               : 3
+Min PCM size                      : 8
+Motion search range               : 32
+Intra period                      : -1
+Decoding refresh type             : 0
+QP                                : 32.00
+Max dQP signaling depth           : 0
+Cb QP Offset                      : 0
+Cr QP Offset                      : 0
+Max CU chroma QP adjustment depth : -1
+QP adaptation                     : 0 (range=0)
+GOP size                          : 4
+Input bit depth                   : (Y:8, C:8)
+MSB-extended bit depth            : (Y:8, C:8)
+Internal bit depth                : (Y:8, C:8)
+PCM sample bit depth              : (Y:8, C:8)
+Extended precision processing     : Disabled
+Intra reference smoothing         : Enabled
+Implicit residual DPCM            : Disabled
+Explicit residual DPCM            : Disabled
+Residual rotation                 : Disabled
+Single significance map context   : Disabled
+Cross-component prediction        : Disabled
+High-precision prediction weight  : Disabled
+Golomb-Rice parameter adaptation  : Disabled
+CABAC bypass bit alignment        : Disabled
+Sao Luma Offset bit shifts        : 0
+Sao Chroma Offset bit shifts      : 0
+Cost function:                    : Lossy coding (default)
+RateControl                       : 0
+Max Num Merge Candidates          : 5
+
+TOOL CFG: IBD:0 HAD:1 RDQ:1 RDQTS:1 RDpenalty:0 SQP:0 ASR:0 FEN:1 ECU:0 FDM:1 CFM:0 ESD:0 RQT:1 TransformSkip:1 TransformSkipFast:1 TransformSkipLog2MaxSize:2 Slice: M=0 SliceSegment: M=0 CIP:0 SAO:1 PCM:0 TransQuantBypassEnabled:0 WPP:0 WPB:0 PME:2  WaveFrontSynchro:0 WaveFrontSubstreams:1 ScalingList:0 TMVPMode:1 AQpS:0 SignBitHidingFlag:1 RecalQP:0
+
+Non-environment-variable-controlled macros set as follows: 
+
+                                RExt__DECODER_DEBUG_BIT_STATISTICS =   0
+                                      RExt__HIGH_BIT_DEPTH_SUPPORT =   0
+                            RExt__HIGH_PRECISION_FORWARD_TRANSFORM =   0
+                                        O0043_BEST_EFFORT_DECODING =   0
+                              RD_TEST_SAO_DISABLE_AT_PICTURE_LEVEL =   0
+
+                   Input ChromaFormatIDC =   4:2:0
+       Output (internal) ChromaFormatIDC =   4:2:0
+
+POC    0 TId: 0 ( I-SLICE, nQP 32 QP 32 )      37848 bits [Y 35.8899 dB    U 39.3731 dB    V 39.1490 dB] [ET   222 ] [L0 ] [L1 ]
+POC    1 TId: 0 ( B-SLICE, nQP 35 QP 35 )       1576 bits [Y 34.5960 dB    U 39.2088 dB    V 38.7406 dB] [ET   326 ] [L0 0 ] [L1 0 ]
+
+
+SUMMARY --------------------------------------------------------
+	Total Frames |   Bitrate     Y-PSNR    U-PSNR    V-PSNR    YUV-PSNR 
+	        2    a     985.6000   35.2429   39.2910   38.9448   36.1535
+
+
+I Slices--------------------------------------------------------
+	Total Frames |   Bitrate     Y-PSNR    U-PSNR    V-PSNR    YUV-PSNR 
+	        1    i    1892.4000   35.8899   39.3731   39.1490   36.7513
+
+
+P Slices--------------------------------------------------------
+	Total Frames |   Bitrate     Y-PSNR    U-PSNR    V-PSNR    YUV-PSNR 
+	        0    p         -nan      -nan      -nan      -nan      -nan
+
+
+B Slices--------------------------------------------------------
+	Total Frames |   Bitrate     Y-PSNR    U-PSNR    V-PSNR    YUV-PSNR 
+	        1    b      78.8000   34.5960   39.2088   38.7406   35.6282
+
+RVM: 0.000
+Bytes written to file: 4947 (989.400 kbps)
+
+ Total Time:      548.646 sec.
+         9022 function calls (9006 primitive calls) in 562.256 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.004    0.004    0.018    0.018 profilingCallsCacheHM.py:121(parseAnnotate)
+       26    0.000    0.000    0.000    0.000 profilingCallsCacheHM.py:165(<genexpr>)
+       22    0.000    0.000    0.000    0.000 profilingCallsCacheHM.py:168(<genexpr>)
+      626    0.000    0.000    0.000    0.000 profilingCallsCacheHM.py:186(<genexpr>)
+      860    0.000    0.000    0.000    0.000 profilingCallsCacheHM.py:189(<genexpr>)
+      182    0.000    0.000    0.000    0.000 profilingCallsCacheHM.py:192(<genexpr>)
+      203    0.001    0.000    0.004    0.000 profilingCallsCacheHM.py:203(writeOutput)
+        1    0.000    0.000  562.248  562.248 profilingCallsCacheHM.py:207(codifica)
+        1    0.000    0.000    0.000    0.000 profilingCallsCacheHM.py:37(Function)
+      207    0.004    0.000    0.004    0.000 profilingCallsCacheHM.py:38(__init__)
+        1    0.000    0.000  562.256  562.256 profilingCallsCacheHM.py:4(<module>)
+        2    0.000    0.000    0.000    0.000 profilingCallsCacheHM.py:62(__add__)
+      203    0.003    0.000    0.003    0.000 profilingCallsCacheHM.py:65(toString)
+      146    0.001    0.000    0.001    0.000 profilingCallsCacheHM.py:68(accumulate)
+      203    0.001    0.000    0.001    0.000 profilingCallsCacheHM.py:85(calcRates)
+        2    0.000    0.000    0.001    0.000 re.py:188(compile)
+        2    0.000    0.000    0.001    0.000 re.py:226(_compile)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:178(_compile_charset)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:207(_optimize_charset)
+      6/2    0.000    0.000    0.000    0.000 sre_compile.py:32(_compile)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:354(_simple)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:359(_compile_info)
+        4    0.000    0.000    0.000    0.000 sre_compile.py:472(isstring)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:478(_code)
+        2    0.000    0.000    0.001    0.000 sre_compile.py:493(compile)
+       10    0.000    0.000    0.000    0.000 sre_parse.py:126(__len__)
+       18    0.000    0.000    0.000    0.000 sre_parse.py:130(__getitem__)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:134(__setitem__)
+       43    0.000    0.000    0.000    0.000 sre_parse.py:138(append)
+      8/4    0.000    0.000    0.000    0.000 sre_parse.py:140(getwidth)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:178(__init__)
+       53    0.000    0.000    0.000    0.000 sre_parse.py:182(__next)
+       12    0.000    0.000    0.000    0.000 sre_parse.py:195(match)
+       49    0.000    0.000    0.000    0.000 sre_parse.py:201(get)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:257(_escape)
+      4/2    0.000    0.000    0.000    0.000 sre_parse.py:301(_parse_sub)
+      4/2    0.000    0.000    0.000    0.000 sre_parse.py:379(_parse)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:67(__init__)
+        2    0.000    0.000    0.001    0.000 sre_parse.py:675(parse)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:72(opengroup)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:83(closegroup)
+        6    0.000    0.000    0.000    0.000 sre_parse.py:90(__init__)
+        2    0.000    0.000    0.000    0.000 {_sre.compile}
+      291    0.001    0.000    0.002    0.000 {any}
+       24    0.000    0.000    0.000    0.000 {isinstance}
+  374/370    0.000    0.000    0.000    0.000 {len}
+      413    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        2    0.000    0.000    0.000    0.000 {method 'close' of 'file' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        4    0.000    0.000    0.000    0.000 {method 'extend' of 'list' objects}
+       64    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        2    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+      262    0.000    0.000    0.000    0.000 {method 'match' of '_sre.SRE_Pattern' objects}
+       10    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+        2    0.000    0.000    0.000    0.000 {method 'readlines' of 'file' objects}
+        2    0.000    0.000    0.000    0.000 {method 'remove' of 'list' objects}
+     3600    0.002    0.000    0.002    0.000 {method 'replace' of 'str' objects}
+      593    0.001    0.000    0.001    0.000 {method 'split' of 'str' objects}
+      193    0.000    0.000    0.000    0.000 {method 'strip' of 'str' objects}
+       12    0.000    0.000    0.000    0.000 {min}
+        3    0.000    0.000    0.000    0.000 {open}
+       39    0.000    0.000    0.000    0.000 {ord}
+        3  562.236  187.412  562.236  187.412 {posix.system}
+      193    0.000    0.000    0.000    0.000 {range}
+        2    0.000    0.000    0.000    0.000 {time.strftime}
+
+
