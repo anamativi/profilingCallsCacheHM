@@ -83,12 +83,20 @@ class Function:
 		self.Irh += self.Ir - self.Imr		#instruction read hits only
 		
 	def calcRates(self):
-		self.L1Rate	= (self.I1mr + self.D1mr + self.D1mw) / ((self.Ir + self.Dr + self.Dw) * 0.01)
-		self.I1Rate	= (self.I1mr) / ((self.Ir)* 0.01)
-		self.D1Rate	= (self.D1mr + self.D1mw) / ((self.Dr + self.Dw)* 0.01)
-		self.LLRate	= (self.ILmr + self.DLmr + self.DLmw) / ((self.Ir + self.Dr + self.Dw)* 0.01)
-		self.ILRate	= (self.ILmr) / ((self.Ir) *0.01)
-		self.DLRate	= (self.DLmr + self.DLmw) / ((self.Dr + self.Dw)* 0.01)		
+		if (self.Ir == 0 or self.Dr == 0 or self.Dw == 0):
+			self.L1Rate	= 0
+			self.I1Rate	= 0
+			self.D1Rate	= 0
+			self.LLRate	= 0
+			self.ILRate	= 0
+			self.DLRate	= 0
+		else:
+			self.L1Rate	= (self.I1mr + self.D1mr + self.D1mw) / ((self.Ir + self.Dr + self.Dw) * 0.01)
+			self.I1Rate	= (self.I1mr) / ((self.Ir)* 0.01)
+			self.D1Rate	= (self.D1mr + self.D1mw) / ((self.Dr + self.Dw)* 0.01)
+			self.LLRate	= (self.ILmr + self.DLmr + self.DLmw) / ((self.Ir + self.Dr + self.Dw)* 0.01)
+			self.ILRate	= (self.ILmr) / ((self.Ir) *0.01)
+			self.DLRate	= (self.DLmr + self.DLmw) / ((self.Dr + self.Dw)* 0.01)		
 		
 nullList = ['0', '0', '0', '0', '0', '0', '0', '0', '0']
 #initialization of acc variables
@@ -231,7 +239,7 @@ def codifica():
 
 											os.system(callValgrind)
 
-											callAnnotate = "callgrind_annotate --auto=yes "+ out + "valgrind_" + hmConfig + memoryConfig + ".txt >" + out + "annotate_" + hmConfig + memoryConfig + ".txt"
+											callAnnotate = "callgrind_annotate --auto=yes --threshold=100 "+ out + "valgrind_" + hmConfig + memoryConfig + ".txt >" + out + "annotate_" + hmConfig + memoryConfig + ".txt"
 											os.system(callAnnotate)
 											parseAnnotate(csv, hmConfig, memoryConfig)
 											
