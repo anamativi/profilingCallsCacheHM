@@ -117,9 +117,9 @@ modules = [Entropy, IQ, Q, IT, T, P, I, Inter, Intra, Filter]
 classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Inter, 'TComTrQuant':T, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT, 'fastFowardDst':T, 'FastInverseDst':IT, 'void':Inter}
 PBI = re.compile('partialButterflyInverse(\d+)')
 PB = re.compile('partialButterfly(\d+)')
-InterList = ['Inter', 'xGetComponentBits', 'xPatternRefinement', 'TZSearch', 'Mv', 'DPCM', 'xGetTemplateCost', 'Motion', 'MVP', 'xMergeEstimation']
+InterList = ['Inter', 'xGetComponentBits', 'xPatternRefinement', 'TZSearch', 'Mv', 'DPCM', 'xGetTemplateCost', 'Motion', 'MVP', 'xMergeEstimation', 'xGetSAD12', 'xGetSAD24', 'xGetSAD48',]
 IntraList = ['Intra', 'xUpdateCandList']
-IList = ['SSE', 'SAD', 'HAD', 'Available', 'ReferenceSamples']
+IList = ['SSE', 'HAD', 'Available', 'ReferenceSamples', 'xGetSAD8', 'xGetSAD', 'xGetSAD4', 'xGetSAD16', 'xGetSAD32', 'xGetSAD16N', 'xGetSAD64' ]
 ITList = ['xIT']
 TList = ['xT', 'Transform', 'Dst']
 QList = ['Quant']
@@ -229,9 +229,9 @@ def codifica():
 											name = name[5].split(".")
 											name = name[0]
 											
-											hmConfig = name + "_" + "_QP_" + qp + "_nF_" + nf
+											hmConfig = name + "_" + "_QP_" + qp + "_nF_" + nf + "_SR_" + sRange
 											memoryConfig = "_MSizeL1_" + str(cSizeL1) +  "_AssL1_" + str(cAssL1) + "_MSizeLL_" + str(cSizeLL)+ "_AssLL_" + str(cAssLL) + "_Word_" + str(cWord)
-											hmSetup = "../../HM-16.2/bin/./TAppEncoderStatic -c " + profile + " -c " + video + " --QP=" + qp + " --SearchRange=" + sRange + " --FramesToBeEncoded=" + nf# + '--RDOQ=0 --RDOQTS=0'
+											hmSetup = "../../HM-16.2/bin/./TAppEncoderStatic -c " + profile + " -c " + video + " --QP=" + qp + " --SearchRange=" + sRange + " --FramesToBeEncoded=" + nf
 											
 											csv = open (out + hmConfig + memoryConfig + ".csv", 'w')
 											

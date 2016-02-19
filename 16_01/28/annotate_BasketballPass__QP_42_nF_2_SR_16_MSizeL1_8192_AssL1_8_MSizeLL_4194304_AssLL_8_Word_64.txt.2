@@ -1,0 +1,27 @@
+--------------------------------------------------------------------------------
+Profile data file '16_01/28/valgrind_BasketballPass__QP_42_nF_2_SR_16_MSizeL1_8192_AssL1_8_MSizeLL_4194304_AssLL_8_Word_64.txt.2' (creator: callgrind-3.10.1)
+--------------------------------------------------------------------------------
+I1 cache: 32768 B, 64 B, 8-way associative
+D1 cache: 8192 B, 64 B, 8-way associative
+LL cache: 4194304 B, 64 B, 8-way associative
+Timerange: Basic block 508918828 - 1146909961
+Trigger: --dump-after=TEncSlice::compressSlice(TComPic*)
+Profiled target:  ../../HM-16.2/bin/./TAppEncoderStatic -c ../../HM-16.2/cfg/encoder_lowdelay_main.cfg -c ../../HM-16.2/cfg/per-sequence/BasketballPass.cfg --QP=42 --SearchRange=16 --FramesToBeEncoded=2 (PID 3778, part 2)
+Events recorded:  Ir Dr Dw I1mr D1mr D1mw ILmr DLmr DLmw
+Events shown:     Ir Dr Dw I1mr D1mr D1mw ILmr DLmr DLmw
+Event sort order: Ir Dr Dw I1mr D1mr D1mw ILmr DLmr DLmw
+Thresholds:       100 0 0 0 0 0 0 0 0
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+           Ir            Dr            Dw       I1mr       D1mr       D1mw  ILmr   DLmr    DLmw 
+--------------------------------------------------------------------------------
+7,455,659,476 3,019,638,445 1,309,222,002 16,484,619 63,087,986 57,121,093 5,358 32,392 137,299  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+           Ir            Dr            Dw       I1mr       D1mr       D1mw  ILmr   DLmr    DLmw  file:function
+--------------------------------------------------------------------------------
+7,455,659,476 3,019,638,445 1,309,222,002 16,484,619 63,087,986 57,121,093 5,358 32,392 137,299  ???:main [/home/mativi/HM-16.2/bin/TAppEncoderStatic]
+

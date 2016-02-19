@@ -1,0 +1,28 @@
+BasketballPass__QP_42_nF_2_SR_16_MSizeL1_8192_AssL1_8_MSizeLL_4194304_AssLL_8_Word_64	Instruction Read	Data Read	Data Write	 L1 Instruction Misses (Read)	L1 Data Misses (Read)	L1 Data Misses (Write)	LL Instruction Misses (Read)	LL Data Misses (Read)	LL Data Misses (Write)	Intruction Hits (Read)	Data Hits (Read)	Data Hits(Write)	L1 Miss Rate	L1 Instruction Miss Rate	L1 Data Miss Rate	LL Miss Rate	LL Instruction Miss Rate	LL Data Miss Rate
+0x0804cf30	26390541	8694012	4839231	2461	131138	42610	1879	11341	25890	26386201	8551533	4770731	0.441363473963 %	0.00932531091348 %	1.28386078636 %	0.0979616561396 %	0.00711997529721 %	0.27510774764 %
+
+RESULTS	Instruction Read	Data Read	Data Write	 L1 Instruction Misses (Read)	L1 Data Misses (Read)	L1 Data Misses (Write)	LL Instruction Misses (Read)	LL Data Misses (Read)	LL Data Misses (Write)	Intruction Hits (Read)	Data Hits (Read)	Data Hits(Write)	L1 Miss Rate	L1 Instruction Miss Rate	L1 Data Miss Rate	LL Miss Rate	LL Instruction Miss Rate	LL Data Miss Rate
+Entropy	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+InvQuant	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Quant	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+InvTransf	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Transf	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Misc	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Inter/Intra	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Inter	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Intra	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Filter	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+BasketballPass__QP_42_nF_2_SR_16_MSizeL1_8192_AssL1_8_MSizeLL_4194304_AssLL_8_Word_64	Instruction Read	Data Read	Data Write	 L1 Instruction Misses (Read)	L1 Data Misses (Read)	L1 Data Misses (Write)	LL Instruction Misses (Read)	LL Data Misses (Read)	LL Data Misses (Write)	Intruction Hits (Read)	Data Hits (Read)	Data Hits(Write)	L1 Miss Rate	L1 Instruction Miss Rate	L1 Data Miss Rate	LL Miss Rate	LL Instruction Miss Rate	LL Data Miss Rate
+0x0804cf30	26390541	8694012	4839231	2461	131138	42610	1879	11341	25890	26386201	8551533	4770731	0.441363473963 %	0.00932531091348 %	1.28386078636 %	0.0979616561396 %	0.00711997529721 %	0.27510774764 %
+
+RESULTS	Instruction Read	Data Read	Data Write	 L1 Instruction Misses (Read)	L1 Data Misses (Read)	L1 Data Misses (Write)	LL Instruction Misses (Read)	LL Data Misses (Read)	LL Data Misses (Write)	Intruction Hits (Read)	Data Hits (Read)	Data Hits(Write)	L1 Miss Rate	L1 Instruction Miss Rate	L1 Data Miss Rate	LL Miss Rate	LL Instruction Miss Rate	LL Data Miss Rate
+Entropy	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+InvQuant	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Quant	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+InvTransf	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Transf	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Misc	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Inter/Intra	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Inter	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Intra	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
+Filter	0	0	0	0	0	0	0	0	0	0	0	0	0 %	0 %	0 %	0 %	0 %	0 %
