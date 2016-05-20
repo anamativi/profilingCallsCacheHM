@@ -18,6 +18,7 @@ p = open(proj + ".txt", 'r')
 lines = p.readlines()
 p.close()
 
+
 for n in lines:
 	l = n.split(',')
 	l.pop()
@@ -33,6 +34,7 @@ size_Ll		= param[6]
 ass_L1		= param[7]
 ass_Ll		= param[8]
 cache_word	= param[9]
+
 
 class Function:
 	def __init__(self, name, lista):
@@ -117,9 +119,8 @@ modules = [Entropy, IQ, Q, IT, T, P, I, Inter, Intra, Filter]
 classesDic = {'TEncEntropy':Entropy, 'TComInterpolationFilter':Inter, 'TComTrQuant':T, 'TComYuv': P, 'TEncSbac': Entropy, 'TComLoopFilter': Filter, 'TEncBinCABAC':Entropy, 'xTrMxN':T, 'xITrMxN':IT, 'fastFowardDst':T, 'FastInverseDst':IT, 'void':Inter}
 PBI = re.compile('partialButterflyInverse(\d+)')
 PB = re.compile('partialButterfly(\d+)')
-InterList = ['Inter', 'xGetComponentBits', 'xPatternRefinement', 'TZSearch', 'Mv', 'DPCM', 'xGetTemplateCost', 'Motion', 'MVP', 'xMergeEstimation', 'xGetSAD12', 'xGetSAD24', 'xGetSAD48',]
-IntraList = ['Intra', 'xUpdateCandList']
-IList = ['SSE', 'HAD', 'Available', 'ReferenceSamples', 'xGetSAD8', 'xGetSAD', 'xGetSAD4', 'xGetSAD16', 'xGetSAD32', 'xGetSAD16N', 'xGetSAD64' ]
+InterList = ['Inter', 'xGetComponentBits', 'xPatternRefinement', 'TZSearch', 'Mv', 'DPCM', 'xGetTemplateCost', 'Motion', 'MVP', 'xMergeEstimation', 'xGetSAD12', 'xGetSAD24', 'xGetSAD48']
+IntraList = ['Intra', 'Available', 'ReferenceSamples', 'xUpdateCandList']
 ITList = ['xIT']
 TList = ['xT', 'Transform', 'Dst']
 QList = ['Quant']
@@ -191,22 +192,21 @@ def parseAnnotate(csv, hmConfig, memoryConfig):
 					if 'QT' in fMethod: #QuadTree
 						T.accumulate(fClass, words)
 					else:
-						if any(x in fMethod + fClass for x in IList): #methods used both in Intra and Inter pred modes
-							I.accumulate(fClass, words)
+						if any(x in fMethod for x in InterList):
+							Inter.accumulate(fClass, words)
 						else:
-							if any(x in fMethod for x in InterList):
-								Inter.accumulate(fClass, words)
-							else:
-								if any(x in fMethod for x in IntraList):
-									Intra.accumulate(fClass, words)
+							if any(x in fMethod for x in IntraList):
+								Intra.accumulate(fClass, words)
 	Pred = I + Intra + Inter
 	#printing final results to csv
+	resumo = open (out + "resumo_" + hmConfig + memoryConfig + ".csv", 'w')
 	i = 0
-	print >>csv, "\nRESULTS" + labels
+	print >> resumo, "\nRESULTS" + labels
 	for module in modules:
-		writeOutput(csv, modules, i)
+		writeOutput(resumo, modules, i)
 		i = i + 1
 	f.close
+	resumo.close
     			
 def writeOutput(csv, functionsList, i):
 	functionsList[i].calcRates()
@@ -226,20 +226,22 @@ def codifica():
 										for cWord in cache_word:
 										
 											name = video.split("/")
-											name = name[5].split(".")
+											name = name[4].split(".")
 											name = name[0]
 											
 											hmConfig = name + "_" + "_QP_" + qp + "_nF_" + nf + "_SR_" + sRange
 											memoryConfig = "_MSizeL1_" + str(cSizeL1) +  "_AssL1_" + str(cAssL1) + "_MSizeLL_" + str(cSizeLL)+ "_AssLL_" + str(cAssLL) + "_Word_" + str(cWord)
-											hmSetup = "../../HM-16.2/bin/./TAppEncoderStatic -c " + profile + " -c " + video + " --QP=" + qp + " --SearchRange=" + sRange + " --FramesToBeEncoded=" + nf
-											
+											hmSetup = "~/HM-16.2_callfunc/bin/./TAppEncoderStatic -c " + profile + " -c " + video + " --QP=" + qp + " --SearchRange=" + sRange + " --FramesToBeEncoded=" + nf
+
 											csv = open (out + hmConfig + memoryConfig + ".csv", 'w')
-											
 											callValgrind = "valgrind --tool=callgrind --simulate-cache=yes" + " --D1=" + str(cSizeL1) + "," + str(cAssL1) + "," + str(cWord) + " --LL=" + str(cSizeLL) + "," + str(cAssLL) + "," + str(cWord) + " --callgrind-out-file=" + out + "valgrind_" + hmConfig + memoryConfig + ".txt " + hmSetup
+											
+											print callValgrind
 
 											os.system(callValgrind)
 
 											callAnnotate = "callgrind_annotate --auto=yes --threshold=100 "+ out + "valgrind_" + hmConfig + memoryConfig + ".txt >" + out + "annotate_" + hmConfig + memoryConfig + ".txt"
+											print callAnnotate
 											os.system(callAnnotate)
 											parseAnnotate(csv, hmConfig, memoryConfig)
 											

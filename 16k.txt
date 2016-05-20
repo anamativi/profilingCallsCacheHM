@@ -1,5 +1,5 @@
-../../HM-16.2/cfg/encoder_lowdelay_main.cfg,
-../../HM-16.2/cfg/per-sequence/BasketballPass.cfg, ../../HM-16.2/cfg/per-sequence/BQMall.cfg, ../../HM-16.2/cfg/per-sequence/BasketballDrive.cfg, ../../HM-16.2/cfg/per-sequence/Traffic.cfg,
+~/HM-16.2/cfg/encoder_lowdelay_main.cfg,
+~/HM-16.2/cfg/per-sequence/BasketballDrive.cfg,
 5,
 32,
 32,
@@ -9,4 +9,3 @@
 2,
 32,
 
-../../HM-16.2/bin/./TAppEncoderStatic -c ../../HM-16.2/cfg/encoder_lowdelay_main.cfg -c ../../HM-16.2/cfg/per-sequence/BQMall.cfg --QP=32 --SearchRange=32 --FramesToBeEncoded=100
