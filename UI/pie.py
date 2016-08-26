@@ -8,9 +8,9 @@ labelList = []
 fracList = []
 
 cs=cm.Set1(np.arange(40)/40.)
+setup	= sys.argv[1]
 
-
-f = open("resumo_BasketballPass__QP_47_nF_2_SR_16_MSizeL1_8192_AssL1_8_MSizeLL_4194304_AssLL_8_Word_64.csv", 'r')
+f = open("Results/" + setup + "_resumo.csv", 'r')
 lines = f.readlines()
 f.close()
 

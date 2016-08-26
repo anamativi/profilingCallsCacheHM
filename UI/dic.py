@@ -1,0 +1,10 @@
+uiStrings = {'Random Access':'~/HM-16.2/cfg/encoder_randomaccess_main.cfg',
+'Low Delay':'~/HM-16.2/cfg/encoder_lowdelay_main.cfg',
+'BasketballPass':'~/HM-16.2/cfg/per-sequence/BasketballPass.cfg',
+'BQMall':'~/HM-16.2/cfg/per-sequence/BQMall.cfg',
+'8KB':'8192',
+'16KB':'16384',
+'32KB':'32768',
+'4MB':'4194304',
+'8MB':'8388608',
+'16MB':'16777216'}

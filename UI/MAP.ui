@@ -6,57 +6,294 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>967</width>
-    <height>584</height>
+    <width>440</width>
+    <height>517</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QComboBox" name="comboVideos">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>70</y>
-     <width>321</width>
-     <height>27</height>
+     <x>10</x>
+     <y>10</y>
+     <width>401</width>
+     <height>451</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>BasketballPass</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>BQMall</string>
-    </property>
-   </item>
+   <layout class="QVBoxLayout" name="verticalLayout_Cache">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_Video">
+      <item>
+       <widget class="QLabel" name="label_Profiles">
+        <property name="text">
+         <string>Profile</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_Profiles">
+        <item>
+         <property name="text">
+          <string>Random Access</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Low Delay</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_Videos">
+        <property name="text">
+         <string>Video Sequence</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_Videos">
+        <item>
+         <property name="text">
+          <string>BasketballPass</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>BQMall</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_QP">
+        <property name="text">
+         <string>QP</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_QP">
+        <item>
+         <property name="text">
+          <string>22</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>27</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>32</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>37</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_SR">
+        <property name="text">
+         <string>Search Range</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_SR">
+        <item>
+         <property name="text">
+          <string>8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>16</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>32</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>64</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_NF">
+        <property name="text">
+         <string>Number of Frames</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinBox_NF"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_Cache">
+      <property name="text">
+       <string>Cache Configurations</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_L1">
+      <item>
+       <widget class="QLabel" name="label_L1Size">
+        <property name="text">
+         <string>L1 Size</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_L1Size">
+        <item>
+         <property name="text">
+          <string>8KB</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>16KB</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>32KB</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_L1Ass">
+        <property name="text">
+         <string>L1 Associativity</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_L1Ass">
+        <item>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>4</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_LL">
+      <item>
+       <widget class="QLabel" name="label_LLSize">
+        <property name="text">
+         <string>LL Size</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_LLSize">
+        <item>
+         <property name="text">
+          <string>4MB</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>8MB</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>16MB</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_LLAss">
+        <property name="text">
+         <string>LL Associativity</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_LLAss">
+        <item>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>4</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_Word">
+      <property name="text">
+       <string>Cache Word Size</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="comboBox_Word">
+      <item>
+       <property name="text">
+        <string>32</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>64</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QCommandLinkButton" name="commandLinkButton">
+  <widget class="QCommandLinkButton" name="commandLinkButton_Run">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>440</y>
-     <width>179</width>
+     <x>360</x>
+     <y>470</y>
+     <width>61</width>
      <height>41</height>
     </rect>
    </property>
    <property name="text">
     <string>Run</string>
-   </property>
-  </widget>
-  <widget class="QProgressBar" name="progressBar">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>530</y>
-     <width>321</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="value">
-    <number>24</number>
    </property>
   </widget>
  </widget>
